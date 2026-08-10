@@ -11,7 +11,7 @@
         </a>
         <table class="w-full bg-white rounded shadow">
             <thead><tr class="text-left border-b">
-                <th class="p-3">Bezeichnung</th><th class="p-3">Art</th>
+                <th class="p-3">Bezeichnung</th>
                 <th class="p-3">Art</th>
                 <th class="p-3">Preis</th>
                 <th class="p-3">Mindestbestand</th>

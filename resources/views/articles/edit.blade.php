@@ -8,7 +8,7 @@
         <form action="{{ route('articles.update') }}" method="POST"
               class="bg-white p-6 rounded shadow space-y-4">
 
-            @csrf @
+            @csrf @method('PUT')
             <div><input name="name" placeholder="Bezeichnung" value="{{ $article->name }}" class="w-full border rounded p-2"></div>
             <div><input name="type" placeholder="Art" value="{{ $article->type }}" class="w-full border rounded p-2"></div>
             <div><input name="price" placeholder="Preis in EUR" value="{{ $article->prize }}" class="w-full border rounded p-2"></div>
