@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('article_id')->constrained('articles');
             $table->foreignId('storage_location_id')->constrained('storage_locations');
             $table->integer('quantity')->default(0);
-            $table->date('stored_at')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
