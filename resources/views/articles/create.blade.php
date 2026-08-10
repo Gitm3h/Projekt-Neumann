@@ -9,6 +9,17 @@
         class="bg-white p-6 rounded shadow space-y-4">
 
             @csrf
+
+            @if ($errors->any())
+                <div class="mb-4 rounded bg-red-100 p-3 text-red-700">
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div><input name="name" placeholder="Bezeichnung" class="w-full border rounded p-2"></div>
             <div><input name="type" placeholder="Art" class="w-full border rounded p-2"></div>
             <div><input name="price" placeholder="Preis in EUR" class="w-full border rounded p-2"></div>

@@ -22,9 +22,9 @@
             @foreach ($articles as $article)
                 <tr class="border-b">
                     <td class="p-3">{{ $article->name }}</td>
-                    <td class="p-3">{{ $articles->type }}</td> price min_stock
-                    <td class="p-3">{{ $articles->price }}EUR</td>
-                    <td class="p-3">{{ $articles->min_stock }}</td>
+                    <td class="p-3">{{ $article->type }}</td>
+                    <td class="p-3">{{ $article->price }}EUR</td>
+                    <td class="p-3">{{ $article->min_stock }}</td>
                     <td class="p-3">
                         <a href="{{ route('articles.edit', $article) }}"
                            class="text-teal-700">Bearbeiten

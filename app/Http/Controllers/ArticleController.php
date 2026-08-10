@@ -27,7 +27,7 @@ class ArticleController extends Controller
          'colour' => 'nullable',
          'weight' => 'nullable |numeric',
          'model_year' => 'nullable |integer',
-         'price' => 'required | integer',
+         'price' => 'required | numeric',
          'min_stock' => 'required | integer',
      ]);
      Article::create($data);
@@ -48,7 +48,7 @@ class ArticleController extends Controller
             'colour' => 'nullable',
             'weight' => 'nullable |numeric',
             'model_year' => 'nullable |integer',
-            'price' => 'required | integer',
+            'price' => 'required | numeric',
             'min_stock' => 'required | integer',
         ]);
         $article->update($data);
