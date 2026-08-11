@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font semibold text-xl text-gray-800 leading tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Artikelverwaltung
         </h2>
     </x-slot>
@@ -27,7 +27,7 @@
         <tbody>
             @forelse ($articles as $article)
                 <tr class="border-b">
-                    <td class="p-3">{{ $article->name }}</td>
+                    <td class="p-3"><a href="{{ route('articles.show', $article) }}" class="text-teal-700 hover:text-teal-800 hover:underline">{{ $article->name }}</a></td>
                     <td class="p-3">{{ $article->type }}</td>
                     <td class="p-3">{{ $article->price }}EUR</td>
                     <td class="p-3">{{ $article->min_stock }}</td>
