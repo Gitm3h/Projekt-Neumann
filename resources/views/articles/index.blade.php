@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($articles as $article)
+            @forelse ($articles as $article)
                 <tr class="border-b">
                     <td class="p-3">{{ $article->name }}</td>
                     <td class="p-3">{{ $article->type }}</td>
@@ -33,11 +33,16 @@
                               method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button class="text-red-600 hover:text-red-700 ml-2">Löschen</button>
+                            <button onclick="return confirm('Artikel wirklich löschen?')"
+                                    class="text-red-600 hover:text-red-700 ml-2">Löschen</button>
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="5" class="p-3 text-gray-500">Noch keine Artikel vorhanden.</td>
+                </tr>
+            @endforelse
         </tbody>
         </table>
     </div>
