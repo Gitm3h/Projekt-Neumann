@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
 
-#[Fillable(['article_id', 'storage_location_id', 'quantity', 'stored_at'])]
+#[Fillable(['article_id', 'storage_location_id', 'quantity', 'date'])]
 class Stock extends Model
 {
     public function article () {return $this->belongsTo(Article::class);}
