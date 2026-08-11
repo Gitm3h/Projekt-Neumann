@@ -40,7 +40,7 @@ class DemoDataSeeder extends Seeder
                 'article_id' => $article->id,
                 'storage_location_id' => $locations->random()->id,
                 'quantity' => $quantity,
-                'stored_at' => now()->subDays(rand(1, 60)),
+                'date' => now()->subDays(rand(1, 60)),
             ]);
         }
     }
