@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font semibold text-xl text-gray-800 leading tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Artikelverwaltung
         </h2>
     </x-slot>
@@ -9,6 +9,12 @@
            class="inline-block mb-4 px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">
             + Neuer Artikel
         </a>
+
+        <form method="GET" class="mb-4">
+            <input name="suche" value="{{ request('suche') }}" placeholder="Bezeichnung oder Art" class="border rounded p-2">
+            <button class="px-3 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Suchen</button>
+        </form>
+
         <table class="w-full bg-white rounded shadow">
             <thead><tr class="text-left border-b">
                 <th class="p-3">Bezeichnung</th>
@@ -21,7 +27,7 @@
         <tbody>
             @forelse ($articles as $article)
                 <tr class="border-b">
-                    <td class="p-3">{{ $article->name }}</td>
+                    <td class="p-3"><a href="{{ route('articles.show', $article) }}" class="text-teal-700 hover:text-teal-800 hover:underline">{{ $article->name }}</a></td>
                     <td class="p-3">{{ $article->type }}</td>
                     <td class="p-3">{{ $article->price }}EUR</td>
                     <td class="p-3">{{ $article->min_stock }}</td>

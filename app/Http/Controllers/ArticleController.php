@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::all();
+        $query = Article::query();
+        if ($request->filled('suche'))
+        {
+            $s = $request->input('suche');
+            $query->where('name', 'LIKE', "%{$s}%") ->orWhere('type', 'LIKE', "%{$s}%");
+        }
+        $articles = $query->get();
         return view('articles.index', ['articles' => $articles]);
     }
 
@@ -77,6 +83,11 @@ class ArticleController extends Controller
         );
         $article->update($data);
         return redirect()->route('articles.index');
+    }
+
+    public function show(Article $article)
+    {
+        return view('articles.show', ['article' => $article]);
     }
 
     public function destroy(Article $article)

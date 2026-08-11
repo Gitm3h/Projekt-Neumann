@@ -22,6 +22,11 @@
             <div><input name="type" placeholder="Art" value="{{ $article->type }}" class="w-full border rounded p-2"></div>
             <div><input name="price" placeholder="Preis in EUR" value="{{ $article->price }}" class="w-full border rounded p-2"></div>
             <div><input name="min_stock" placeholder="Mindestbestand" value="{{ $article->min_stock }}" class="w-full border rounded p-2"></div>
+            <div><input name="size" placeholder="Größe" value="{{ $article->size }}" class="w-full border rounded p-2"></div>
+            <div><input name="colour" placeholder="Farbe" value="{{ $article->colour }}" class="w-full border rounded p-2"></div>
+            <div><input name="weight" placeholder="Gewicht" value="{{ $article->weight }}" class="w-full border rounded p-2"></div>
+            <div><input name="model_year" placeholder="Modelljahr" value="{{ $article->model_year }}" class="w-full border rounded p-2"></div>
+
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
         </form>
     </div>
