@@ -15,15 +15,15 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link href="route ('articles.index')" :active="">
+                    <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                         {{ __('Artikel') }}
                     </x-nav-link>
-                    <x-nav-link href="#">
+                    <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
                         {{ __('Lager') }}
                     </x-nav-link>
-                    <x-nav-link href="#">
+                    <a href="#" class="inline-flex items-center px-1 pt-1 text-sm text-gray-400 cursor-not-allowed">
                         {{ __('Kasse') }}
-                    </x-nav-link>
+                    </a>
 
                 </div>
             </div>
@@ -80,15 +80,15 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="#">
+            <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                 {{ __('Artikel') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="#">
+            <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
                 {{ __('Lager') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link href="#">
+            <a href="#" class="block pl-3 pr-4 py-2 text-base text-gray-400 cursor-not-allowed">
                 {{ __('Kasse') }}
-            </x-responsive-nav-link>
+            </a>
         </div>
 
         <!-- Responsive Settings Options -->
