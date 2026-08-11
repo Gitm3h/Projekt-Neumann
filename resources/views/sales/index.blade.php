@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4">
-        <a href="{{ route('articles.create') }}"
+        <a href="{{ route('sales.create') }}"
            class="inline-block mb-4 px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">
             + Neuer Verkauf
         </a>
