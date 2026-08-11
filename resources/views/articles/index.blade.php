@@ -9,6 +9,12 @@
            class="inline-block mb-4 px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">
             + Neuer Artikel
         </a>
+
+        <form method="GET" class="mb-4">
+            <input name="suche" value="{{ request('suche') }}" placeholder="Bezeichnung oder Art" class="border rounded p-2">
+            <button class="px-3 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Suchen</button>
+        </form>
+
         <table class="w-full bg-white rounded shadow">
             <thead><tr class="text-left border-b">
                 <th class="p-3">Bezeichnung</th>
