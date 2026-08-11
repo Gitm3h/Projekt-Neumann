@@ -29,7 +29,19 @@ class ArticleController extends Controller
          'model_year' => 'nullable |integer',
          'price' => 'required | numeric',
          'min_stock' => 'required | integer',
-     ]);
+     ],
+         [
+            'required' => 'Das Feld :attribute ist erforderlich.',
+            'numeric' => 'Das Feld :attribute muss eine Zahl sein',
+            'integer' => 'Das Feld :attribute muss eine ganze Zahl sein',
+         ],
+         [
+            'name' => 'Bezeichnung',
+             'type' => 'Art',
+             'price' => 'Preis',
+             'min_stock' => 'Min-Stock',
+         ]
+     );
      Article::create($data);
      return redirect()->route('articles.index');
     }
@@ -50,7 +62,19 @@ class ArticleController extends Controller
             'model_year' => 'nullable |integer',
             'price' => 'required | numeric',
             'min_stock' => 'required | integer',
-        ]);
+        ],
+        [
+            'required' => 'Das Feld :attribute ist erforderlich.',
+            'numeric' => 'Das Feld :attribute muss eine Zahl sein',
+            'integer' => 'Das Feld :attribute muss eine ganze Zahl sein',
+         ],
+         [
+             'name' => 'Bezeichnung',
+             'type' => 'Art',
+             'price' => 'Preis',
+             'min_stock' => 'Min-Stock',
+             ]
+        );
         $article->update($data);
         return redirect()->route('articles.index');
     }
