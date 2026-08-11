@@ -19,7 +19,7 @@
             </div>
             <div>
                 <label class="block mb-1">Menge</label>
-                <select name='quantity' type="number" min="1" value="1" class="w-full border rounded p-2"></select>
+                <input name='quantity' type="number" min="1" value="1" class="w-full border rounded p-2">
             </div>
             <div>
                 <label class="block mb-1">Zahlart</label>
