@@ -24,29 +24,51 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'article_id' => 'required|exists:articles,id',
-            'quantity' => 'required|integer|min:1',
-            'payment_method' => 'required',
+            'items' => ['required', 'array'],
+            'items.*.article_id' => ['nullable', 'exists:articles,id'],
+            'items.*.quantity' => ['nullable', 'integer', 'min:1'],
+            'payment_method' => ['required'],
         ]);
-        $article = Article::findOrFail($data['article_id']);
+
+        $lines = collect($data['items'])->filter(function ($row)
+        {
+            return !empty($row['article_id']) && ($row['quantity'] ?? 0) > 0;
+        });
+
+        if ($lines->isEmpty())
+        {
+            return back()->withErrors(['items' => 'Bitte mindestens einen Artikel wählen.']);
+        }
+
+        $total = 0;
+        foreach ($lines as $row)
+        {
+            $article = Article::findOrFail($row['article_id']);
+            $total += $article->price * $row['quantity'];
+        }
 
         $sale =Sale::create([
             'user_id' => auth()->id(),
             'payment_method' => $data['payment_method'],
-            'total' => $article->price * $data['quantity'],
+            'total' => $total,
             'date' => now(),
         ]);
 
-        $sale->items()->create([
-            'article_id' => $article->id,
-            'quantity' => $data['quantity'],
-            'unit_price' => $article->price,
-        ]);
+        foreach ($lines as $row)
+        {
+            $article =Article::findOrFail($row['article_id']);
 
-        $stock = Stock::where('article_id', $article->id)->first();
-        if ($stock) { $stock->quantity = $stock->quantity - $data['quantity']; }
 
-        return redirect()->route('sales.index');
+            $sale->items()->create([
+                'article_id' => $article->id,
+                'quantity' => $row['quantity'],
+                'unit_price' => $article->price,
+            ]);
 
+            $stock = Stock::where('article_id', $article->id)->first();
+            if ($stock) { $stock->quantity = $stock->quantity - $row['quantity'];
+            $stock->save();}
+        }
+
+        return redirect()->route('sales.index');}
     }
-}
