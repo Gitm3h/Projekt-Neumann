@@ -24,9 +24,9 @@
                     <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                         {{ __('Lagerplätze') }}
                     </x-nav-link>
-                    <a href="#" class="inline-flex items-center px-1 pt-1 text-sm text-gray-400 cursor-not-allowed">
+                    <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                         {{ __('Kasse') }}
-                    </a>
+                    </x-nav-link>
 
                 </div>
             </div>
