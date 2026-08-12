@@ -26,7 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::get('stock', [StockController::class, 'index'])->name('stock.index');
     Route::resource('storage-locations', StorageLocationController::class);
-    Route::get('storage-locations', [StorageLocationController::class, 'index'])->name('storage-locations.index');
     Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
     Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
     Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
