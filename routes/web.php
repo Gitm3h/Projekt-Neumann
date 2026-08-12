@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\StorageLocationController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\InvoiceController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
     Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
     Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
+
+    Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
 });
 
 require __DIR__.'/auth.php';
