@@ -9,18 +9,20 @@
               class="bg-white p-6 rounded shadow space-y-4">
 
             @csrf
-            <div>
-                <label class="block mb-1">Artikel</label>
-                <select name='article_id' class="w-full border rounded p-2">
-                    @foreach ($articles as $article)
-                        <option value="{{ $article->id }}">{{ $article->name }} ({{$article->price}} EUR)</option>
-                    @endforeach
-                </select>
+            <div id="positionen" class="space-y-4">
+                <div class="position flex gap-2">
+                    <select name="items[0][article_id]" class="flex-1 border rounded p-2">
+                        <option value="">-- Artikel wählen --</option>
+                        @foreach ($articles as $article)
+                            <option value="{{ $article->id }}">{{ $article->name }} ({{$article->price}} EUR)</option>
+                        @endforeach
+                    </select>
+                    <input name="items[0][quantity]" type="number" min="1" value="1" class="w-full border rounded p-2">
+                </div>
             </div>
-            <div>
-                <label class="block mb-1">Menge</label>
-                <input name='quantity' type="number" min="1" value="1" class="w-full border rounded p-2">
-            </div>
+
+            <button type="button" id="addRow" class="px-3 py-1 bg-gray-200 rounded">+ Artikel</button>
+
             <div>
                 <label class="block mb-1">Zahlart</label>
                 <select name="payment_method" class="w-full border rounded p-2">
@@ -34,4 +36,23 @@
 
         </form>
     </div>
+    <script>
+        let index = 1;
+
+        document.getElementById('addRow').addEventListener('click', function()
+        {
+            const container = document.getElementById('positionen');
+            const clone = container.querySelector('position').cloneNode(true);
+
+            clone.querySelectorAll('select, input').forEach(function (feld)
+            {
+                feld.name = feld.name.replace('[0', '[' + index + ']');
+                if (feld.tagName === 'SELECT') feld.selectedIndex = 0;
+                if (feld.tagName === 'INPUT') feld.value = 1;
+            });
+
+            container.appendChild(clone);
+            index++;
+        });
+    </script>
 </x-app-layout>
