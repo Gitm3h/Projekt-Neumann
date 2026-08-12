@@ -21,9 +21,9 @@
                     <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
                         {{ __('Lager') }}
                     </x-nav-link>
-                    <a href="#" class="inline-flex items-center px-1 pt-1 text-sm text-gray-400 cursor-not-allowed">
+                    <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                         {{ __('Kasse') }}
-                    </a>
+                    </x-nav-link>
 
                 </div>
             </div>
@@ -86,9 +86,10 @@
             <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
                 {{ __('Lager') }}
             </x-responsive-nav-link>
-            <a href="#" class="block pl-3 pr-4 py-2 text-base text-gray-400 cursor-not-allowed">
+            <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                 {{ __('Kasse') }}
-            </a>
+            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
