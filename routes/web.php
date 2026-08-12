@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('stock-movements', StockMovementController::class)->only(['index', 'store', 'destroy']);
 
     Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
+    Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
 });
 
 require __DIR__.'/auth.php';
