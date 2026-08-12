@@ -5,6 +5,7 @@ use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\StorageLocationController;
+use App\Http\Controllers\SaleController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('articles', ArticleController::class);
     Route::get('stock', [StockController::class, 'index'])->name('stock.index');
-    Route::resource('storage-locations', StorageLocationController::class);
+    Route::get('storage-locations', [StorageLocationController::class, 'index'])->name('storage-locations.index');
+    Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
+    Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
 });
 
 require __DIR__.'/auth.php';
