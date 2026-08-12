@@ -7,6 +7,7 @@
     <div class="max-w-3xl mx-auto py-6 px-4">
         <div class="bg-white p-6 rounded shadow space-y-2">
             <p><strong>Bezeichnung:</strong> {{ $article->name }}</p>
+            <p><strong>Lagerplaetze:</strong></p>
             <p><strong>Art:</strong> {{ $article->type }}</p>
             <p><strong>Preis in EUR:</strong> {{ $article->price }}</p>
             <p><strong>Mindestbestand:</strong> {{ $article->min_stock }}</p>
@@ -14,6 +15,13 @@
             <p><strong>Farbe:</strong> {{ $article->colour }}</p>
             <p><strong>Gewicht:</strong> {{ $article->weight }}</p>
             <p><strong>Modelljahr:</strong> {{ $article->model_year }}</p>
+            <ul class="list-disc ml-6">
+                @forelse($article->stocks as $stock)
+                    <li>{{ $stock->storageLocation->name }} &ndash; {{ $stock->quantity }} Stueck</li>
+                @empty
+                    <li>Nicht eingelagert</li>
+                @endforelse
+            </ul>
             <a href="{{ route('articles.index') }}" class="inline-block px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">
                 Zurück zur Übersicht</a>
         </div>
