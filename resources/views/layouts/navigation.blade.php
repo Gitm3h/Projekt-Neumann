@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
                         {{ __('Lager') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
+                        {{ __('Lagerplätze') }}
+                    </x-nav-link>
                     <a href="#" class="inline-flex items-center px-1 pt-1 text-sm text-gray-400 cursor-not-allowed">
                         {{ __('Kasse') }}
                     </a>
@@ -85,6 +88,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
                 {{ __('Lager') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
+                {{ __('Lagerplätze') }}
             </x-responsive-nav-link>
             <a href="#" class="block pl-3 pr-4 py-2 text-base text-gray-400 cursor-not-allowed">
                 {{ __('Kasse') }}
