@@ -17,6 +17,7 @@
                 <th class="p-3">Menge</th>
                 <th class="p-3">Zahlart</th>
                 <th class="p-3">Summe</th>
+                <th class="p-3">Rechnung</th>
             </tr>
             </thead>
             <tbody>
@@ -27,11 +28,13 @@
                     <td class="p-3">{{ $sale->items->sum('quantity') }}</td>
                     <td class="p-3">{{ $sale->payment_method }}</td>
                     <td class="p-3">({{ $sale->total }} EUR)</td>
+                    <td class="p-3"><a href="{{ route('invoices.pdf', $sale) }}" target="_blank" class="text-teal-700 hover:underline">PDF</a>
+                    </td>
                 </tr>
             @empty
 
                 <tr>
-                    <td colspan="5" class="p-3 text-gray-500">Noch keine Verkäufe.</td>
+                    <td colspan="6" class="p-3 text-gray-500">Noch keine Verkäufe.</td>
                 </tr>
             @endforelse
             </tbody>
