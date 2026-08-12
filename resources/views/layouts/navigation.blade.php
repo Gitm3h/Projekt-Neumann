@@ -18,9 +18,7 @@
                     <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                         {{ __('Artikel') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
-                        {{ __('Lager') }}
-                    </x-nav-link>
+
                     <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                         {{ __('Lagerplätze') }}
                     </x-nav-link>
@@ -86,9 +84,7 @@
             <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                 {{ __('Artikel') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
-                {{ __('Lager') }}
-            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                 {{ __('Lagerplätze') }}
             </x-responsive-nav-link>
