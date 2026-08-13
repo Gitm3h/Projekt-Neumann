@@ -12,7 +12,7 @@ class StockMovementController extends Controller
     public function index()
     {
     $movements = StockMovement::with(['article', 'user'])->latest()->get();
-    return view('stock-movements.index', ['movements' => '$movements']);
+    return view('stock-movements.index', ['movements' => $movements]);
     }
 
     public function create()
@@ -44,7 +44,7 @@ class StockMovementController extends Controller
         {
             if ($data['type'] == 'Eingang')
             {
-                $stock->quantity = $stock->quantity - $data['quantity'];
+                $stock->quantity = $stock->quantity + $data['quantity'];
             }
             else
             {
