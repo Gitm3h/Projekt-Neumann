@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
+                    @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
                         <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                             {{ __('Artikel') }}
                         </x-nav-link>
@@ -35,6 +35,12 @@
                         <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                             {{ __('Kasse') }}
                         </x-nav-link>
+                    @endif
+                    @if (auth()->user()->role === 'administrator')
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                            {{ __('Benutzer') }}
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>
@@ -92,7 +98,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
+            @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
                 <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                     {{ __('Artikel') }}
                  </x-responsive-nav-link>
@@ -104,8 +110,15 @@
                 <x-responsive-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
                     {{ __('Buchungen') }}
                 </x-responsive-nav-link>
+            @endif
+            @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
                 <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                     {{ __('Kasse') }}
+                </x-responsive-nav-link>
+            @endif
+            @if (in_array(auth()->user()->role, ['administrator']))
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                    {{ __('Benutzer') }}
                 </x-responsive-nav-link>
             @endif
 
