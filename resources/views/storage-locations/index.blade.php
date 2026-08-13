@@ -22,7 +22,11 @@
             <tbody>
             @forelse ($locations as $location)
                 <tr class="border-b">
-                    <td class="p-3">{{ $location->name }}</td>
+                    <td class="p-3">
+                        <a href="{{ route('storage-locations.show', $location) }}"
+                           class="text-teal-700 hover:underline">{{ $location->name }}</a>
+
+                    </td>
 
                     <!-- Stock Count Column -->
                     <td class="p-3">{{ $location->stocks_count }} Artikel</td>

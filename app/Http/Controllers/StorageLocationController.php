@@ -33,4 +33,9 @@ class StorageLocationController extends Controller
         StorageLocation::findOrFail($id)->delete();
         return redirect()->route('storage-locations.index');
     }
+
+    public function show($id) {
+        $location = StorageLocation::with('stocks.articles')->findOrFail($id);
+        return view('storage-locations.show', ['location' => $location]);
+    }
 }
