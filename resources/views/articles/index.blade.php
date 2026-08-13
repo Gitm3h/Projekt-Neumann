@@ -21,6 +21,7 @@
                 <th class="p-3">Art</th>
                 <th class="p-3">Preis</th>
                 <th class="p-3">Mindestbestand</th>
+                <th class="p-3">Bestand</th>
                 <th class="p-3">Aktion</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                     <td class="p-3">{{ $article->type }}</td>
                     <td class="p-3">{{ $article->price }}EUR</td>
                     <td class="p-3">{{ $article->min_stock }}</td>
+                    <td class="p-3">{{ $article->stocks->sum('quantity') }}</td>
                     <td class="p-3">
                         <a href="{{ route('articles.edit', $article) }}"
                            class="text-teal-700 hover:text-teal-800">Bearbeiten

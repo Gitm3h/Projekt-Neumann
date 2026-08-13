@@ -29,5 +29,25 @@
 
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
         </form>
+        <div class="flex items-center gap-3">
+            <form action="{{ route('stock-movements.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                <input type="hidden" name="type" value="Ausgang">
+                <input type="hidden" name="quantity" value="1">
+                <button class="px-3 py-1 bg-gray-200 rounded">-</button>
+            </form>
+
+            <span>Bestand: {{ $article->stocks->sum('quantity') }}</span>
+
+            <form action="{{ route('stock-movements.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="article_id" value="{{ $article->id }}">
+                <input type="hidden" name="type" value="Eingang">
+                <input type="hidden" name="quantity" value="1">
+                <button class="px-3 py-1 bg-gray-200 rounded">+</button>
+            </form>
+
+        </div>
     </div>
 </x-app-layout>

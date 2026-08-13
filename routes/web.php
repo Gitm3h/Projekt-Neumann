@@ -28,14 +28,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('articles', ArticleController::class);
     Route::get('stock', [StockController::class, 'index'])->name('stock.index');
     Route::resource('storage-locations', StorageLocationController::class);
-    Route::get('storage-locations', [StorageLocationController::class, 'index'])->name('storage-locations.index');
     Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
     Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
     Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
 
-    Route::resource('stock-movements', StockMovementController::class)->only(['index', 'store', 'destroy']);
-
     Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
+    Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
 });
 
 require __DIR__.'/auth.php';

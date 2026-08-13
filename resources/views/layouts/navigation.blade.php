@@ -18,14 +18,15 @@
                     <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                         {{ __('Artikel') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
-                        {{ __('Lager') }}
-                    </x-nav-link>
+
                     <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                         {{ __('Lagerplätze') }}
                     </x-nav-link>
                     <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                         {{ __('Kasse') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
+                        {{ __('Buchungen') }}
                     </x-nav-link>
 
                 </div>
@@ -86,16 +87,16 @@
             <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                 {{ __('Artikel') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.*')">
-                {{ __('Lager') }}
-            </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                 {{ __('Lagerplätze') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                 {{ __('Kasse') }}
             </x-responsive-nav-link>
-
+            <x-responsive-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
+                {{ __('Buchungen') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

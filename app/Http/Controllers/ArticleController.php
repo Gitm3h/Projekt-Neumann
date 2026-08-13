@@ -87,6 +87,7 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
+        $article->load('stocks.storageLocation');
         return view('articles.show', ['article' => $article]);
     }
 
