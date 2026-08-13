@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('article_id')->constrained('articles');
             $table->integer('quantity');
             $table->string('status')->default('reserviert');
-            $table->date('reserved_at')->nullable();
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
