@@ -34,6 +34,20 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
     Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
+
+    Route::middleware('role:kassenkraft, administrator')->group(function () {
+        Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
+        Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
+        Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
+        Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
+    });
+
+    Route::middleware('role:lagermitarbeiter, spediteur, administrator')->group(function () {
+        Route::resource('articles', ArticleController::class);
+        Route::get('stock', [StockController::class, 'index'])->name('stock.index');
+        Route::resource('storage-locations', StorageLocationController::class);
+        Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
+    });
 });
 
 require __DIR__.'/auth.php';
