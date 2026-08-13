@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\StorageLocationController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\InvoiceController;
 
 Route::get('/', function () {
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
 
     Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
+    Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
 });
 
 require __DIR__.'/auth.php';
