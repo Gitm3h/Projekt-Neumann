@@ -8,6 +8,8 @@ use App\Http\Controllers\StorageLocationController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PortalController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,9 +33,18 @@ Route::middleware('auth')->group(function () {
     Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
     Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
     Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
-
     Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
     Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
+    Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
 });
+
+Route::middleware(['auth', 'customer'])
+    ->prefix('portal')->name('portal.')
+    ->group(function () {
+        Route::get('/', [PortalController::class, 'index'])->name('index');
+        Route::post('reservieren', [PortalController::class, 'reserve'])
+            ->name('reserve');
+    });
 
 require __DIR__.'/auth.php';
