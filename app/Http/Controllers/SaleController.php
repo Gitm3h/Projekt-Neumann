@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\Article;
 use App\Models\Stock;
+use App\Models\StockMovement;
 
 class SaleController extends Controller
 {
@@ -68,7 +69,14 @@ class SaleController extends Controller
             $stock = Stock::where('article_id', $article->id)->first();
             if ($stock) { $stock->quantity = $stock->quantity - $row['quantity'];
             $stock->save();}
-        }
 
+            StockMovement::create([
+                'article_id' => $article->id,
+                'user_id' => auth()->id(),
+                'type' => 'Ausgang',
+                'quantity' => $row['quantity'],
+                'date' => now(),
+            ]);
+        }
         return redirect()->route('sales.index');}
     }
