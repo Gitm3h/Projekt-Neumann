@@ -9,6 +9,8 @@ use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PortalController;
+use App\Http\Controllers\ReservationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,8 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
    // Route::resource('articles', ArticleController::class);
    // Route::get('stock', [StockController::class, 'index'])->name('stock.index');
-    Route::resource('storage-locations', StorageLocationController::class);
-    // Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
+       // Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
    // Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
    // Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
 
@@ -41,6 +42,9 @@ Route::middleware('auth')->group(function () {
         Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
         Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
         Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
+
+        Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
+        Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     });
 
     Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
@@ -53,6 +57,11 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:administrator')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
     });
+});
+
+Route::middleware(['auth', 'customer'])->prefix('portal')->name ('portal.')->group(function () {
+    Route::get('/', [PortalController::class, 'index'])->name('index');
+    Route::post('reservieren', [PortalController::class, 'reserve'])->name('reserve');
 });
 
 require __DIR__.'/auth.php';
