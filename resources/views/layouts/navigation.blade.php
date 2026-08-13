@@ -15,19 +15,26 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
-                        {{ __('Artikel') }}
-                    </x-nav-link>
 
-                    <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
-                        {{ __('Lagerplätze') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
-                        {{ __('Kasse') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
-                        {{ __('Buchungen') }}
-                    </x-nav-link>
+                    @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
+                        <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
+                            {{ __('Artikel') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
+                            {{ __('Lagerplätze') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur', 'administrator']))
+                        <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
+                            {{ __('Buchungen') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
+                        <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
+                            {{ __('Kasse') }}
+                        </x-nav-link>
 
                 </div>
             </div>
