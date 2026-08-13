@@ -91,19 +91,24 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
-                {{ __('Artikel') }}
-            </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
-                {{ __('Lagerplätze') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
-                {{ __('Kasse') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
-                {{ __('Buchungen') }}
-            </x-responsive-nav-link>
+            @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
+                <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
+                    {{ __('Artikel') }}
+                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
+                    {{ __('Lagerplätze') }}
+                </x-responsive-nav-link>
+            @endif
+            @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur', 'administrator']))
+                <x-responsive-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
+                    {{ __('Buchungen') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
+                    {{ __('Kasse') }}
+                </x-responsive-nav-link>
+            @endif
+
         </div>
 
         <!-- Responsive Settings Options -->
