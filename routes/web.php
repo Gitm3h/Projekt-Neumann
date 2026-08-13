@@ -8,6 +8,7 @@ use App\Http\Controllers\StorageLocationController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PortalController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,5 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
     Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
 });
+
+Route::middleware(['auth', 'customer'])
+    ->prefix('portal')->name('portal.')
+    ->group(function () {
+        Route::get('/', [PortalController::class, 'index'])->name('index');
+        Route::post('reservieren', [PortalController::class, 'reserve'])
+            ->name('reserve');
+    });
 
 require __DIR__.'/auth.php';
