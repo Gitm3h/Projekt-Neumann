@@ -35,10 +35,20 @@
                         <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                             {{ __('Kasse') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                            {{ __('Reservierungen') }}
+                        </x-nav-link>
                     @endif
+
                     @if (auth()->user()->role === 'administrator')
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                             {{ __('Benutzer') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (auth()->user()->role === 'kunde')
+                        <x-nav-link :href="route('portal.index')" :active="request()->routeIs('portal.*')">
+                            {{ __('Kundenportal') }}
                         </x-nav-link>
                     @endif
 
@@ -115,12 +125,24 @@
                 <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                     {{ __('Kasse') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                    {{ __('Reservierungen') }}
+                </x-responsive-nav-link>
             @endif
+
             @if (in_array(auth()->user()->role, ['administrator']))
                 <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                     {{ __('Benutzer') }}
                 </x-responsive-nav-link>
             @endif
+
+            @if(auth()->user()->role === 'kunde')
+                <x-responsive-nav-link :href="route('portal.index')" :active="request()->routeIs('portal.*')">
+                    {{ __('Kundenportal') }}
+                </x-responsive-nav-link>
+
+            @endif
+
 
         </div>
 
