@@ -53,12 +53,30 @@ Route::middleware('auth')->group(function () {
         Route::resource('storage-locations', StorageLocationController::class);
         Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
     });
+    Route::resource('articles', ArticleController::class);
+    Route::get('stock', [StockController::class, 'index'])->name('stock.index');
+    Route::resource('storage-locations', StorageLocationController::class);
+    Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
+    Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
+    Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
+    Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
+    Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
+    Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+});
+
+Route::middleware(['auth', 'customer'])
+    ->prefix('portal')->name('portal.')
+    ->group(function () {
+        Route::get('/', [PortalController::class, 'index'])->name('index');
+        Route::post('reservieren', [PortalController::class, 'reserve'])
+            ->name('reserve');
+    });
 
     Route::middleware('role:administrator')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
-    });
-});
 
+});
 Route::middleware(['auth', 'customer'])->prefix('portal')->name ('portal.')->group(function () {
     Route::get('/', [PortalController::class, 'index'])->name('index');
     Route::post('reservieren', [PortalController::class, 'reserve'])->name('reserve');
