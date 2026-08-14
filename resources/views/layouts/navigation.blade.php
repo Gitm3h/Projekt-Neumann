@@ -28,7 +28,9 @@
                     <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
                         {{ __('Buchungen') }}
                     </x-nav-link>
-
+                    <x-nav-link :href="route('reservations.index')" :active="request()->routIs('reservations.*')">
+                        {{__('Reservierung')}}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -96,6 +98,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
                 {{ __('Buchungen') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                {{ __('Reservierung') }}
             </x-responsive-nav-link>
         </div>
 
