@@ -74,7 +74,7 @@ Route::middleware(['auth', 'customer'])
     });
 
     Route::middleware('role:administrator')->group(function () {
-        Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy']);
+        Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy', 'edit', 'update']);
 
 });
 Route::middleware(['auth', 'customer'])->prefix('portal')->name ('portal.')->group(function () {
