@@ -25,6 +25,12 @@
                     <td class="p-3">{{ $user->email }}</td>
                     <td class="p-3">{{ $user->role }}</td>
                     <td class="p-3">
+
+                        <a href="{{ route('users.edit', $user) }}"
+                           class="text-teal-700 hover:text-teal-800 mr-3">
+                            Bearbeiten
+                        </a>
+
                         <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
