@@ -23,6 +23,7 @@
             <div><input name="name" placeholder="Bezeichnung" class="w-full border rounded p-2"></div>
             <div><input name="type" placeholder="Art" class="w-full border rounded p-2"></div>
             <div><input name="price" placeholder="Preis in EUR" class="w-full border rounded p-2"></div>
+            <div><input name="vat_rate" placeholder="MwSt-Satz in %" class="w-full border rounded p-2"></div>
             <div><input name="min_stock" placeholder="Mindestbestand" class="w-full border rounded p-2"></div>
             <div><input name="size" placeholder="Größe" class="w-full border rounded p-2"></div>
             <div><input name="colour" placeholder="Farbe" class="w-full border rounded p-2"></div>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sales_id')->constrained('sales');
+            $table->foreignId('sale_id')->constrained('sales');
             $table->foreignId('customer_id')->constrained('customers');
             $table->decimal('invoice_number')->unique();
             $table->string('status')->default('offen');

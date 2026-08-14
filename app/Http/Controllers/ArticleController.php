@@ -31,10 +31,11 @@ class ArticleController extends Controller
          'type' => 'required',
          'size' => 'nullable',
          'colour' => 'nullable',
-         'weight' => 'nullable |numeric',
-         'model_year' => 'nullable |integer',
-         'price' => 'required | numeric',
-         'min_stock' => 'required | integer',
+         'weight' => ['nullable', 'numeric'],
+         'model_year' => ['nullable', 'integer'],
+         'price' => ['required', 'numeric'],
+         'vat_rate' => ['required', 'numeric'],
+         'min_stock' => ['required', 'integer'],
      ],
          [
             'required' => 'Das Feld :attribute ist erforderlich.',
@@ -45,6 +46,7 @@ class ArticleController extends Controller
             'name' => 'Bezeichnung',
              'type' => 'Art',
              'price' => 'Preis',
+             'vat_rate' => 'Mehrwert-Steuer',
              'min_stock' => 'Min-Stock',
          ]
      );
@@ -64,10 +66,11 @@ class ArticleController extends Controller
             'type' => 'required',
             'size' => 'nullable',
             'colour' => 'nullable',
-            'weight' => 'nullable |numeric',
-            'model_year' => 'nullable |integer',
-            'price' => 'required | numeric',
-            'min_stock' => 'required | integer',
+            'weight' => ['nullable', 'numeric'],
+            'model_year' => ['nullable', 'integer'],
+            'price' => ['required', 'numeric'],
+            'vat_rate' => ['required', 'numeric'],
+            'min_stock' => ['required', 'integer'],
         ],
         [
             'required' => 'Das Feld :attribute ist erforderlich.',
@@ -78,6 +81,7 @@ class ArticleController extends Controller
              'name' => 'Bezeichnung',
              'type' => 'Art',
              'price' => 'Preis',
+             'vat_rate' => 'Mehrwert-Steuer',
              'min_stock' => 'Min-Stock',
              ]
         );
