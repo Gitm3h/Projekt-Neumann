@@ -11,6 +11,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -42,7 +43,7 @@ Route::middleware('auth')->group(function () {
         Route::get('sales/create', [SaleController::class, 'create'])->name('sales.create');
         Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
         Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
-
+        Route::get('z-bericht', [ReportController::class, 'zBericht'])->name('reports.z');
         Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
     });
