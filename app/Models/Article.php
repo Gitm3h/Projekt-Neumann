@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable(['name', 'type', 'size', 'colour', 'weight', 'model_year', 'price', 'min_stock'])]
+#[Fillable(['name', 'type', 'size', 'colour', 'weight', 'model_year', 'price', 'vat_rate', 'min_stock'])]
 class Article extends Model
 {
     public function stocks() {return $this->hasMany(Stock::class);}

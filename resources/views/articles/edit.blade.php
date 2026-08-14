@@ -21,6 +21,7 @@
             <div><input name="name" placeholder="Bezeichnung" value="{{ $article->name }}" class="w-full border rounded p-2"></div>
             <div><input name="type" placeholder="Art" value="{{ $article->type }}" class="w-full border rounded p-2"></div>
             <div><input name="price" placeholder="Preis in EUR" value="{{ $article->price }}" class="w-full border rounded p-2"></div>
+            <div><input name="vat_rate" placeholder="MwSt-Satz in %" value="{{ $article->vat_rate }}" class="w-full border rounded p-2"></div>
             <div><input name="min_stock" placeholder="Mindestbestand" value="{{ $article->min_stock }}" class="w-full border rounded p-2"></div>
             <div><input name="size" placeholder="Größe" value="{{ $article->size }}" class="w-full border rounded p-2"></div>
             <div><input name="colour" placeholder="Farbe" value="{{ $article->colour }}" class="w-full border rounded p-2"></div>

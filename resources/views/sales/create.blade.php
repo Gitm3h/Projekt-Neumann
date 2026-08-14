@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <button type="button" id="addRow" class="px-3 py-1 bg-gray-200 rounded">+ Artikel</button>
+            <button type="button" id="addRow" class="px-3 py-1 bg-teal-500 hover:bg-teal-600 transition text-white rounded">+ Artikel</button>
 
             <div>
                 <label class="block mb-1">Zahlart</label>
@@ -29,6 +29,16 @@
                     <option value="Bar">Bar</option>
                     <option value="Karte">Karte</option>
                     <option value="Rechnung">Rechnung</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block mb-1">Rechnung, Kunde nötig</label>
+                <select name="customer_id" class="w-full border rounded p-2">
+                    <option value="">Barverkauf</option>
+                    @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}">{{ $customer->name }} ({{ $customer->type }})</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -42,7 +52,7 @@
         document.getElementById('addRow').addEventListener('click', function()
         {
             const container = document.getElementById('positionen');
-            const clone = container.querySelector('position').cloneNode(true);
+            const clone = container.querySelector('.position').cloneNode(true);
 
             clone.querySelectorAll('select, input').forEach(function (feld)
             {
