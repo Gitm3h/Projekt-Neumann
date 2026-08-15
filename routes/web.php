@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
         Route::get('stock', [StockController::class, 'index'])->name('stock.index');
         Route::resource('storage-locations', StorageLocationController::class);
         Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
+        Route::get('lieferungen', [StockMovementController::class, 'deliveries'])->name('stock-movements.deliveries');
     });
     // Route::resource('articles', ArticleController::class);
     // Route::get('stock', [StockController::class, 'index'])->name('stock.index');

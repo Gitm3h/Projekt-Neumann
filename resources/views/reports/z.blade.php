@@ -4,7 +4,7 @@
             Z-Bericht {{ now()->format('d.m.Y') }}
         </h2>
     </x-slot>
-    <div class="max-w-3xl mx-auto py-6 px-4 bg-white p-6 rounded shadow">
+    <div class="max-w-3xl mx-auto mt-8 py-6 px-4 bg-white p-6 rounded shadow">
         <p>Anzahl Verkäufe: <b>{{ $anzahl }}</b></p>
         <p>Tagesumsatz: <b>{{ number_format($umsatz, 2, ',', '.') }} EUR</b></p>
 

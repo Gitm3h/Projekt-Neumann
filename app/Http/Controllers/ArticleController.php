@@ -15,7 +15,7 @@ class ArticleController extends Controller
             $s = $request->input('suche');
             $query->where('name', 'LIKE', "%{$s}%") ->orWhere('type', 'LIKE', "%{$s}%");
         }
-        $articles = $query->get();
+        $articles = $query->paginate(20)->withQueryString();
         return view('articles.index', ['articles' => $articles]);
     }
 
