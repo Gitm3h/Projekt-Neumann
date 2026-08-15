@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::get('lieferungen', [StockMovementController::class, 'deliveries'])->name('stock-movements.deliveries');
     });
 
-    });
+});
 
 Route::middleware(['auth', 'customer'])
     ->prefix('portal')->name('portal.')

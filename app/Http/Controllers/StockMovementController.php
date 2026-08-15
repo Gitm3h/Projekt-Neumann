@@ -48,18 +48,10 @@ class StockMovementController extends Controller
             }
             else
             {
-                $stock->quantity = $stock->quantity + $data['quantity'];
+                $stock->quantity = $stock->quantity - $data['quantity'];
             }
             $stock->save();
         }
         return redirect()->route('stock-movements.index');
-    }
-
-    public function deliveries()
-    {
-        $lieferungen = StockMovement::with(['article', 'user'])
-            ->where('type', 'Eingang')->latest()->get();
-
-        return view('stock-movements.deliveries', ['lieferungen' => $lieferungen]);
     }
 }
