@@ -54,4 +54,12 @@ class StockMovementController extends Controller
         }
         return redirect()->route('stock-movements.index');
     }
+
+    public function deliveries()
+    {
+        $lieferungen = StockMovement::with(['article', 'user'])
+            ->where('type', 'Eingang')->latest()->get();
+
+        return view('stock-movements.deliveries', ['lieferungen' => $lieferungen]);
+    }
 }

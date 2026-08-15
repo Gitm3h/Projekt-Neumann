@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @if (in_array(auth()->user()->role, ['spediteur', 'administrator']))
+                        <x-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
+                            {{ __('Lieferungen') }}
+                        </x-nav-link>
+                    @endif
 
                     @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
                         <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
@@ -111,6 +116,13 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+
+            @if (in_array(auth()->user()->role, ['spediteur', 'administrator']))
+                <x-responsive-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
+                    {{ __('Lieferungen') }}
+                </x-responsive-nav-link>
+            @endif
 
             @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
                 <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
