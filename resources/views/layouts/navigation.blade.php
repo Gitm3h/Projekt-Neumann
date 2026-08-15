@@ -38,6 +38,10 @@
                         <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
                             {{ __('Reservierungen') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
+                            {{ __('Z-Bericht') }}
+                        </x-nav-link>
+
                     @endif
 
                     @if (auth()->user()->role === 'administrator')
@@ -50,13 +54,6 @@
                         <x-nav-link :href="route('portal.index')" :active="request()->routeIs('portal.*')">
                             {{ __('Kundenportal') }}
                         </x-nav-link>
-                    @endif
-
-                    @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
-                        <x-nav-link :href="route('report.z')" :active="request()->routeIs('report.z')">
-                            {{ __('Z-Bericht') }}
-                        </x-nav-link>
-
                     @endif
 
                 </div>
@@ -135,6 +132,9 @@
                 <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
                     {{ __('Reservierungen') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
+                    {{ __('Z-Bericht') }}
+                </x-responsive-nav-link>
             @endif
 
             @if (in_array(auth()->user()->role, ['administrator']))
@@ -147,14 +147,8 @@
                 <x-responsive-nav-link :href="route('portal.index')" :active="request()->routeIs('portal.*')">
                     {{ __('Kundenportal') }}
                 </x-responsive-nav-link>
-
             @endif
 
-            @if(in_arry(auth()->user()->role, ['kassenkraft', 'administrator']))
-                <x-responsive-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
-                    {{ __('Z-Bericht') }}
-                </x-responsive-nav-link>
-            @endif
 
 
         </div>
