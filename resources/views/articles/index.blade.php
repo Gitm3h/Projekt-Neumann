@@ -53,5 +53,7 @@
             @endforelse
         </tbody>
         </table>
+
+        {{ $articles->links() }}
     </div>
 </x-app-layout>
