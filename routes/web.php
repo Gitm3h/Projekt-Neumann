@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('z-bericht', [ReportController::class, 'zBericht'])->name('reports.z');
         Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+        Route::get('niedrigbestand', [ReportController::class, 'niedrig'])->name('reports.low-stock');
     });
 
     Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
