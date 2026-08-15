@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Sale;
+use App\Models\Article;
 
 class ReportController extends Controller
 {
@@ -19,5 +20,13 @@ class ReportController extends Controller
         ];
 
         return view('reports.z', $data);
+    }
+
+    public function niedrig()
+    {
+        $artikel = Article::with('stocks')->get()
+            ->filter(fn ($a) => $a->stocks->sum('quantity') < $a->min_stock);
+
+        return view('reports.low-stock', ['artikel' => $artikel]);
     }
 }
