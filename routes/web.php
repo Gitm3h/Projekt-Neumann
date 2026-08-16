@@ -15,7 +15,6 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PasswordChangeController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -54,6 +53,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
         Route::resource('customers', CustomerController::class);
+        Route::get('inventory', [ArticleController::class, 'stock'])->name('articles.stock');
     });
 
     Route::middleware('role:lagermitarbeiter,administrator')->group(function () {
