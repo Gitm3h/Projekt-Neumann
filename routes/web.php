@@ -52,6 +52,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::get('z-bericht', [ReportController::class, 'zBericht'])->name('reports.z');
         Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+        Route::get('inventory', [ArticleController::class, 'stock'])->name('articles.stock');
     });
 
     Route::middleware('role:lagermitarbeiter,administrator')->group(function () {
