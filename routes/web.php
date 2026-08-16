@@ -82,7 +82,7 @@ Route::middleware(['auth', 'customer'])
 
     Route::middleware('role:administrator')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy', 'edit', 'update']);
-        Route::patch('users/{user}', [UserController::class, 'resetPassword'])->name('users.reset');
+        Route::patch('users/{user}/password-reset', [UserController::class, 'resetPassword'])->name('users.reset');
 
 });
 
