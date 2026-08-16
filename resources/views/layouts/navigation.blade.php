@@ -46,6 +46,9 @@
                         <x-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
                             {{ __('Z-Bericht') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                            {{ __('Kunden') }}
+                        </x-nav-link>
 
                     @endif
 
