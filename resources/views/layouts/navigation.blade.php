@@ -10,65 +10,27 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    @if (in_array(auth()->user()->role, ['spediteur', 'administrator']))
-                        <x-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
-                            {{ __('Lieferungen') }}
-                        </x-nav-link>
-                    @endif
 
-                    @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
-                        <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
-                            {{ __('Artikel') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
-                            {{ __('Lagerplätze') }}
-                        </x-nav-link>
-                    @endif
+                    @if
+                        (auth()->user()->role === 'administrator')
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700
+                                focus:outline-none transition"
 
-                    @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur', 'administrator']))
-                        <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
-                            {{ __('Buchungen') }}
-                        </x-nav-link>
-                    @endif
+                            </x-slot>
 
-                    @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
-                        <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
-                            {{ __('Kasse') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('articles.stock')" :active="request()->routeIs('articles.stock')">
-                            {{ __('Bestand') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
-                            {{ __('Reservierungen') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
-                            {{ __('Z-Bericht') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
-                            {{ __('Kunden') }}
-                        </x-nav-link>
-
-                    @endif
-
-                    @if (auth()->user()->role === 'administrator')
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                            {{ __('Benutzer') }}
-                        </x-nav-link>
-                    @endif
-
-                    @if (auth()->user()->role === 'kunde')
-                        <x-nav-link :href="route('portal.index')" :active="request()->routeIs('portal.*')">
-                            {{ __('Kundenportal') }}
-                        </x-nav-link>
-                    @endif
+                        </x-dropdown>
 
                 </div>
             </div>
+
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
