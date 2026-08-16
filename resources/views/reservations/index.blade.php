@@ -12,7 +12,7 @@
                     <th class="p-3">Artikel</th>
                     <th class="p-3">Menge</th>
                     <th class="p-3">Status</th>
-                    <th class="p-3">Aktio</th>
+                    <th class="p-3">Aktion</th>
                 </tr>
             </thead>
             <tbody>

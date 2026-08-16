@@ -12,12 +12,21 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 Route::get('/dashboard', function () {
+    $u = Auth::user();
+    if ($u->role === 'kunde')
+        return redirect()->route('portal.index');
+    if ($u->role === 'kassenkraft')
+        return redirect()->route('sales.index');
+    if (in_array ($u->role, ['lagermitarbeiter', 'spediteur']))
+        return redirect()->route('stock-movements.index');
+
     $lowStock = \App\Models\Stock::with('article')->get()
         ->filter(fn($s) => $s->quantity < $s->article->min_stock)
         ->count();
@@ -38,16 +47,23 @@ Route::middleware('auth')->group(function () {
         Route::get('z-bericht', [ReportController::class, 'zBericht'])->name('reports.z');
         Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
-        Route::get('niedrigbestand', [ReportController::class, 'niedrig'])->name('reports.low-stock');
     });
 
-    Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
+    Route::middleware('role:lagermitarbeiter,administrator')->group(function () {
         Route::resource('articles', ArticleController::class);
         Route::get('stock', [StockController::class, 'index'])->name('stock.index');
         Route::resource('storage-locations', StorageLocationController::class);
-        Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store', 'destroy']);
+    });
+
+    Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
+        Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store','destroy']);
         Route::get('lieferungen', [StockMovementController::class, 'deliveries'])->name('stock-movements.deliveries');
     });
+
+    Route::middleware('role:administrator,kassenkraft,lagermitarbeiter,spediteur')->group(function () {
+        Route::get('niedrigbestand', [ReportController::class, 'niedrig'])->name('reports.low-stock');
+    });
+
 
 });
 
