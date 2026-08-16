@@ -52,6 +52,9 @@
                         <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
                             {{ __('Kunden') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('invoices.index')" :active="request()->routeIs('invoices.index')">
+                            {{ __('Rechnungen') }}
+                        </x-nav-link>
 
                     @endif
 
@@ -155,6 +158,12 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
                     {{ __('Z-Bericht') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                    {{ __('Kunden') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('invoices.index')" :active="request()->routeIs('invoices.index')">
+                    {{ __('Rechnungen') }}
                 </x-responsive-nav-link>
             @endif
 
