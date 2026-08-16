@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
 class PasswordChangeController extends Controller
 {
@@ -14,7 +15,7 @@ class PasswordChangeController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'confirmed', Password::min(8)->symbols()->mixedCase()->numbers()],
         ]);
 
         $request->user()->update([

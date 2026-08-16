@@ -19,7 +19,7 @@
                 <div class="text-gray-500 text-sm">Bestände ansehen</div>
             </a>
 
-            <a href="{{ route('stock.index') }}"
+            <a href="{{ route('reports.low-stock') }}"
                class="bg-white p-6 rounded shadow hover:shadow-md transition">
                 <div class="text-red-600 font-semibold">{{ $lowStock ?? 0 }} Artikel</div>
                 <div class="text-gray-500 text-sm">unter Mindestbestand</div>
