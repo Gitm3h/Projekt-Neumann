@@ -25,10 +25,6 @@ Route::get('/dashboard', function () {
     $u = Auth::user();
     if ($u->role === 'kunde')
         return redirect()->route('portal.index');
-    if ($u->role === 'kassenkraft')
-        return redirect()->route('sales.index');
-    if (in_array ($u->role, ['lagermitarbeiter', 'spediteur']))
-        return redirect()->route('stock-movements.index');
 
     $lowStock = \App\Models\Stock::with('article')->get()
         ->filter(fn($s) => $s->quantity < $s->article->min_stock)
