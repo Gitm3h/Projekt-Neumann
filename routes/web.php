@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\PasswordChangeController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
@@ -34,10 +36,13 @@ Route::get('/dashboard', function () {
     return view('dashboard', ['lowStock' => $lowStock]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'password_changed'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('password-changed', [PasswordChangeController::class, 'edit'])->name('password.force');
+    Route::put('password-changed', [PasswordChangeController::class, 'update'])->name('password.force.update');
 
     Route::middleware('role:kassenkraft,administrator')->group(function () {
         Route::get('sales', [SaleController::class, 'index'])->name('sales.index');
@@ -77,6 +82,7 @@ Route::middleware(['auth', 'customer'])
 
     Route::middleware('role:administrator')->group(function () {
         Route::resource('users', UserController::class)->only(['index', 'create', 'store', 'destroy', 'edit', 'update']);
+        Route::patch('users/{user}', [UserController::class, 'resetPassword'])->name('users.reset');
 
 });
 

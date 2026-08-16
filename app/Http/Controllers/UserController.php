@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -25,6 +26,8 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'role' => ['required', 'in:administrator,spediteur,kassenkraft,lagermitarbeiter,kunde']
         ]);
+
+        $data['must_change_password'] = true;
 
         User::create($data);
         return redirect()->route('users.index');
@@ -55,5 +58,16 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('users.index');
+    }
+
+    public function resetPassword(User $user)
+    {
+        $newPassword = Str::random(10);
+
+        $user->update([
+            'password' => $newPassword,
+            'must_change_password' => true,
+        ]);
+        return redirect()->route('users.index')->with('status', 'Neues Passwort für' . $user->name . ':' . $newPassword );
     }
 }
