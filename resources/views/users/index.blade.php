@@ -5,6 +5,10 @@
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4">
+        @if (session('status'))
+            <p class="mb-3 text-teal-700">{{ session('status') }}</p>
+        @endif
+
         <a href="{{ route('users.create') }}"
            class="inline-block mb-4 px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">
             + Neuer Nutzer
@@ -38,6 +42,15 @@
                                 Löschen
                             </button>
                         </form>
+
+                        <form action="{{ route('users.reset', $user) }}" method="POST" class="inline">
+                            @csrf
+                            @method ('PATCH')
+                            <button onclick="return confirm('Passwort wirklich zurücksetzen?')" class="text-amber-600 hover:text-amber-700 ml-6">
+                                Passwort zurücksetzen
+                            </button>
+                        </form>
+
                     </td>
                 </tr>
             @empty

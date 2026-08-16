@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureRole::class,
             'customer' => \App\Http\Middleware\EnsureCustomer::class,
+            'password_changed' => \App\Http\Middleware\EnsurePasswordChanged::class,
         ]);
 
     })
