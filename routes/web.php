@@ -15,6 +15,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PasswordChangeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return redirect()->route('login');
