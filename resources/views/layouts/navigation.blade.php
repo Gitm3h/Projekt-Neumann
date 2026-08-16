@@ -15,22 +15,112 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if
-                        (auth()->user()->role === 'administrator')
+                    @if (auth()->user()->role === 'administrator')
                         <x-dropdown align="left" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700
-                                focus:outline-none transition"
-
+                                <button class="inline-flex items-center px-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-teal-700
+                                hover:border-teal-300 focus:outline-none transition duration-150 ease-in-out">
+                                    Lager
+                                    <svg class="ms-1 h-4 w-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1
+                                    1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                </button>
                             </x-slot>
 
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('articles.index')">Artikel</x-dropdown-link>
+                                <x-dropdown-link :href="route('storage-locations.index')">Lagerplatz</x-dropdown-link>
+                                <x-dropdown-link :href="route('stock-movements.index')">Buchungen</x-dropdown-link>
+                                <x-dropdown-link :href="route('stock-movements.deliveries')">Lieferungen</x-dropdown-link>
+                                <x-dropdown-link :href="route('articles.stock')">Bestand</x-dropdown-link>
+                            </x-slot>
                         </x-dropdown>
+
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-teal-700
+                                hover:border-teal-300 focus:outline-none transition duration-150 ease-in-out">
+                                    Verkauf
+                                    <svg class="ms-1 h-4 w-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1
+                                    1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('sales.index')">Kasse</x-dropdown-link>
+                                <x-dropdown-link :href="route('reservations.index')">Reservierungen</x-dropdown-link>
+                                <x-dropdown-link :href="route('reports.z')">Z-Bericht</x-dropdown-link>
+                                <x-dropdown-link :href="route('invoices.index')">Rechnungen</x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-teal-700
+                                hover:border-teal-300 focus:outline-none transition duration-150 ease-in-out">
+                                    Verwaltung
+                                    <svg class="ms-1 h-4 w-4 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1
+                                    1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('customers.index')">Kunden</x-dropdown-link>
+                                <x-dropdown-link :href="route('users.index')">Benutzer</x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    @endif
+
+
+                    @if (auth()->user()->role ==='kassenkraft')
+                        <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
+                            {{ __('Kasse') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('articles.stock')" :active="request()->routeIs('articles.stock')">
+                            {{ __('Bestand') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
+                            {{ __('Reservierungen') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
+                            {{ __('Z-Bericht') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                            {{ __('Kunden') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('invoices.index')" :active="request()->routeIs('invoices.index')">
+                            {{ __('Rechnungen') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (auth()->user()->role === 'spediteur')
+                        <x-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
+                            {{ __('Lieferungen') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (auth()->user()->role === 'lagermitarbeiter')
+                        <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
+                            {{ __('Artikel') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
+                            {{ __('Lagerplätze') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur']))
+                        <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
+                            {{ __('Buchungen') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (auth()->user()->role === 'kunde')
+                        <x-nav-link :href="route('portal.index')" :active="request()->routeIs('portal.*')">
+                            {{ __('Kundenportal') }}
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>
-
-
-
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -86,13 +176,13 @@
             </x-responsive-nav-link>
 
 
-            @if (in_array(auth()->user()->role, ['spediteur', 'administrator']))
+            @if (in_array(auth()->user()->role, ['administrator','spediteur']))
                 <x-responsive-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
                     {{ __('Lieferungen') }}
                 </x-responsive-nav-link>
             @endif
 
-            @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
+            @if (in_array(auth()->user()->role, ['administrator', 'lagermitarbeiter']))
                 <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                     {{ __('Artikel') }}
                  </x-responsive-nav-link>
@@ -117,6 +207,12 @@
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
                     {{ __('Z-Bericht') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
+                    {{ __('Kunden') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('invoices.index')" :active="request()->routeIs('invoices.index')">
+                    {{ __('Rechnungen') }}
                 </x-responsive-nav-link>
             @endif
 
