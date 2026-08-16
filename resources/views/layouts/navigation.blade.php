@@ -40,6 +40,9 @@
                         <x-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                             {{ __('Kasse') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('articles.stock')" :active="request()->routeIs('articles.stock')">
+                            {{ __('Bestand') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
                             {{ __('Reservierungen') }}
                         </x-nav-link>
@@ -140,6 +143,9 @@
             @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
                 <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                     {{ __('Kasse') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('articles.stock')" :active="request()->routeIs('articles.stock')">
+                    {{ __('Bestand') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
                     {{ __('Reservierungen') }}
