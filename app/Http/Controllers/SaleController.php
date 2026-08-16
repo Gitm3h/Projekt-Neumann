@@ -102,5 +102,6 @@ class SaleController extends Controller
                 'due_date' => $dueDate,
             ]);
 
-        return redirect()->route('sales.index');}
+        return redirect()->route('sales.index');
     }
+}
