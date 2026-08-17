@@ -5,8 +5,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a href="{{ route('dashboard') }}" class="flex-col justify-center leading-tight">
+                        <span class="text-lg font-bold text-teal-700">Spedition Neumann GmbH</span>
+                        <span class="text-[10px] text-gray-500 hidden xl:block">Effiziente Logistik. Klar. Verlässlich. Norddeutsch.</span>
                     </a>
                 </div>
 
@@ -84,7 +85,7 @@
                         <x-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
                             {{ __('Reservierungen') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
+                        <x-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')" class="whitespace-nowrap">
                             {{ __('Z-Bericht') }}
                         </x-nav-link>
                         <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
@@ -208,7 +209,7 @@
                 <x-responsive-nav-link :href="route('reservations.index')" :active="request()->routeIs('reservations.*')">
                     {{ __('Reservierungen') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')">
+                <x-responsive-nav-link :href="route('reports.z')" :active="request()->routeIs('reports.z')" class="whitespace-nowrap">
                     {{ __('Z-Bericht') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')">
