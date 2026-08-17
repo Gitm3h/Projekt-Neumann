@@ -63,11 +63,14 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
 
     Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
         Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store','destroy']);
-        Route::get('lieferungen', [StockMovementController::class, 'deliveries'])->name('stock-movements.deliveries');
     });
 
     Route::middleware('role:administrator,kassenkraft,lagermitarbeiter,spediteur')->group(function () {
         Route::get('niedrigbestand', [ReportController::class, 'niedrig'])->name('reports.low-stock');
+    });
+
+    Route::middleware('role:spediteur,administrator')->group(function () {
+        Route::get('lieferungen', [StockMovementController::class, 'deliveries'])->name('stock-movements.deliveries');
     });
 
 
