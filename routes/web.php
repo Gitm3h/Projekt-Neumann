@@ -81,6 +81,8 @@ Route::middleware(['auth', 'customer'])
     ->prefix('portal')->name('portal.')
     ->group(function () {
         Route::get('/', [PortalController::class, 'index'])->name('index');
+        Route::get('articles', [PortalController::class, 'articles'])->name('articles');
+        Route::get('reservations', [PortalController::class, 'reservations'])->name('reservations');
         Route::post('reservieren', [PortalController::class, 'reserve'])
             ->name('reserve');
     });

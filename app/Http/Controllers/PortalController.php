@@ -11,8 +11,20 @@ class PortalController extends Controller
 {
     public function index()
     {
+        return view('portal.index');
+    }
+
+    public function articles()
+    {
         $articles = Article::orderBy('name')->get();
-        return view('portal.index', ['articles' => $articles]);
+        return view('portal.articles', ['articles' => $articles]);
+    }
+
+    public function reservations()
+    {
+        $customer =Customer::where('user_id', auth()->id())->first();
+        $reservations = $customer ? Reservation::where('customer_id', $customer->id)->with('article')->latest()->get() : collect();
+        return view('portal.reservations', ['reservations' => $reservations]);
     }
 
     public function reserve(Request $request)
