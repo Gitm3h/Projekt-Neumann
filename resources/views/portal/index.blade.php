@@ -4,38 +4,25 @@
             Kundenportal
         </h2>
     </x-slot>
-    <div class="max-w-7xl mx-auto py-6 px-4">
-        @if (session('status'))
-            <p class="mb-3 text-teal-700">{{ session('status') }}</p>
-        @endif
 
-        <table class="w-full bg-white rounded shadow">
-            <thead>
-            <tr class="text-left border-b">
-                <th class="p-3">Artikel</th>
-                <th class="p-3">Bestand</th>
-                <th class="p-3">Reservieren</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($articles as $article)
-                <tr class="border-b">
-                    <td class="p-3">{{$article->name}}</td>
-                    <td class="p-3">{{ $article->stocks->sum('quantity') }}</td>
-                    <td class="p-3">
-                        <form action="{{ route('portal.reserve') }}" method="POST"
-                              class="flex gap-2">
-                            @csrf
-                            <input type="hidden" name="article_id" value="{{ $article->id }}">
-                            <input name="quantity" type="number" min="1" value="1"
-                            class="w-20 border rounded p-1">
-                            <button class="px-3 py-1 bg-teal-700 text-white rounded">OK</button>
-                        </form>
-                    </td>
-                </tr>
+    <div class="max-w-7xl mx-auto py-6 px-4 space-y-6">
 
-            @endforeach
-            </tbody>
-        </table>
+        <div class="bg-white rounded shadow p-6">
+            <p class="text-lg mt-3">Willkommen zurück, {{ auth()->user()->name }}!</p>
+            <p class="text sm text-gray-500">Heute ist der {{ now()->format('d.m.Y') }}</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <a href="{{route('portal.articles') }}" class="bg-white p-6 rounded-xl shadow border-2 border-transparent
+            hover:border-teal-700 hover:shadow-md transition">
+                <div class="text-teal-700 font-semibold">Artikel</div>
+                <div class="text-gray-500 text-sm">Bestand ansehen und Ware reservieren</div>
+            </a>
+            <a href="{{ route('portal.reservations') }}" class="bg-white p-6 rounded-xl shadow border-2 border-transparent
+            hover:border-teal-700 hover:shadow-md transition">
+                <div class="text-teal-700 font-semibold">Reservierungen</div>
+                <div class="text-gray-500 text-sm">Ihre Reservierungen und deren Status</div>
+            </a>
+        </div>
     </div>
 </x-app-layout>
