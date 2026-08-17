@@ -47,6 +47,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::post('sales', [SaleController::class, 'store'])->name('sales.store');
         Route::get('/invoices/{sale}', [InvoiceController::class, 'pdf'])->name('invoices.pdf');
         Route::get('z-bericht', [ReportController::class, 'zBericht'])->name('reports.z');
+        Route::get('z-bericht/pdf', [ReportController::class, 'zBerichtPdf'])->name('reports.z.pdf');
         Route::get('reservations', [ReservationController::class, 'index'])->name('reservations.index');
         Route::patch('reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
         Route::resource('customers', CustomerController::class);
