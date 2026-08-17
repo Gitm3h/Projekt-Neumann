@@ -24,7 +24,6 @@ services:
             - sail
         depends_on:
             - mariadb
-
     mariadb:
         image: 'mariadb:11'
         environment:
