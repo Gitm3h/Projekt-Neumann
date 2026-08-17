@@ -15,7 +15,7 @@
             @forelse($location->stocks as $stock)
                 <tr class="border-b">
                     <td class="p-3">{{ $stock->article->name }}</td>
-                    <td class="p-3">{{ $stock->article->quantity }}</td>
+                    <td class="p-3">{{ $stock->quantity }}</td>
                 </tr>
             @empty
                 <tr><td colspan="2" class="p-3 text-gray-500">Nichts eingelagert.</td></tr>
