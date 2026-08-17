@@ -28,9 +28,9 @@
                             @method('PATCH')
                             <select name="status" onchange="this.form.submit()"
                                     class="border rounded p-1">
-                                <option value="reserviert">reserviert</option>
-                                <option value="erledigt">erledigt</option>
-                                <option value="storniert">storniert</option>
+                                <option value="reserviert" @selected($r->status === 'reserviert')>reserviert</option>
+                                <option value="abgeholt" @selected($r->status === 'abgeholt')>abgeholt</option>
+                                <option value="storniert" @selected($r->status === 'storniert')>storniert</option>
                             </select>
                         </form>
                     </td>
