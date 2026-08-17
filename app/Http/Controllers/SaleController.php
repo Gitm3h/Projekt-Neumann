@@ -30,7 +30,7 @@ class SaleController extends Controller
             'items.*.article_id' => ['nullable', 'exists:articles,id'],
             'items.*.quantity' => ['nullable', 'integer', 'min:1'],
             'payment_method' => ['required'],
-            'customer_id' => ['nullable', 'exists:customers,id'],
+            'customer_id' => ['required_if:payment_method,Rechnung', 'nullable', 'exists:customers,id'],
         ]);
 
         $lines = collect($data['items'])->filter(function ($row)
@@ -89,7 +89,7 @@ class SaleController extends Controller
             $dueDate = null;
             if ($customer && $customer->type === 'gewerblich' && $data['payment_method'] === 'Rechnung')
             {
-                $termDays = 14;
+                $termDays = $data['payment_term_days'] ?? 14;
                 $dueDate = now()->addDays($termDays);
             }
 
