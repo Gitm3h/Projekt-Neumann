@@ -106,7 +106,7 @@
                 </a>
                 <a href="{{ route('reports.z') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                    <div class="text-teal-700 font-semibold">z-Bericht</div>
+                    <div class="text-teal-700 font-semibold">Z-Bericht</div>
                     <div class="text-gray-500 text-sm">Tagesabschluss ansehen</div>
                 </a>
                 <a href="{{ route('users.index') }}"
