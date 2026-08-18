@@ -30,7 +30,7 @@ class UserController extends Controller
         $data['must_change_password'] = true;
 
         User::create($data);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'Benutzer gespeichert');
     }
 
     public function edit(User $user)
@@ -51,13 +51,13 @@ class UserController extends Controller
             unset($data['password']);
         }
         $user->update($data);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'Benutzer gespeichert');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'Benutzer gelöscht');
     }
 
     public function resetPassword(User $user)

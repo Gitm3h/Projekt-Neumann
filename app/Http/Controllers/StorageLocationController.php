@@ -18,7 +18,7 @@ class StorageLocationController extends Controller
     public function store(Request $request) {
         $data = $request->validate(['name' => 'required']);
         StorageLocation::create($data);
-        return redirect()->route('storage-locations.index');
+        return redirect()->route('storage-locations.index')->with('success', 'Lagerplatz gespeichert');
     }
     public function edit($id) {
         $location = StorageLocation::findOrFail($id);
@@ -27,11 +27,11 @@ class StorageLocationController extends Controller
     public function update(Request $request, $id) {
         $data = $request->validate(['name' => 'required']);
         StorageLocation::findOrFail($id)->update($data);
-        return redirect()->route('storage-locations.index');
+        return redirect()->route('storage-locations.index')->with('success', 'Lagerplatz aktualisiert');
     }
     public function destroy($id) {
         StorageLocation::findOrFail($id)->delete();
-        return redirect()->route('storage-locations.index');
+        return redirect()->route('storage-locations.index')->with('success', 'Lagerplatz gelöscht');
     }
 
     public function show($id) {

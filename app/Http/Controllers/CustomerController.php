@@ -38,7 +38,7 @@ class CustomerController extends Controller
             'vat_id' => ['nullable', 'string'],
         ]);
         Customer::create($data);
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Kunde gespeichert');
     }
 
     /**
@@ -72,7 +72,7 @@ class CustomerController extends Controller
             'vat_id' => ['nullable', 'string'],
         ]);
         $customer->update($data);
-        return redirect()->route('customers.index');
+        return redirect()->route('customers.index')->with('success', 'Kunde gespeichert');
     }
 
     /**

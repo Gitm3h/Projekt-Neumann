@@ -57,7 +57,7 @@ class ArticleController extends Controller
          ]
      );
      Article::create($data);
-     return redirect()->route('articles.index');
+     return redirect()->route('articles.index')->with('success', 'Artikel gespeichert.');
     }
 
     public function edit(Article $article)
@@ -92,7 +92,7 @@ class ArticleController extends Controller
              ]
         );
         $article->update($data);
-        return redirect()->route('articles.index');
+        return redirect()->route('articles.index')->with('success', 'Artikel aktualisiert.');
     }
 
     public function show(Article $article)
@@ -104,6 +104,6 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-        return redirect()->route('articles.index');
+        return redirect()->route('articles.index')->with('success', 'Artikel gelöscht');
     }
 }
