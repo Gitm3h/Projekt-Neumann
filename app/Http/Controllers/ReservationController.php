@@ -17,6 +17,6 @@ class ReservationController extends Controller
     {
         $data = $request->validate(['status' => 'required']);
         $reservation->update(['status' => $data['status']]);
-        return back();
+        return back()->with('success', 'Status aktualisiert');
     }
 }

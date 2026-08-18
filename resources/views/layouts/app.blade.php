@@ -29,6 +29,23 @@
 
             <!-- Page Content -->
             <main>
+                @if (session('success'))
+                    <div x-data="{show: true}" x-show="show" class="max-w-7xl mx-auto mt-4 px-4 sm:px-6 lg:px-8">
+                        <div class="bg-green-100 border border-green-300 text-green-800 rounded px-4 py-3 flex items-center justify-between">
+                            <span>{{ session('success') }}</span>
+                            <button @click="show = false" class="ml-4 text-green-800 hover:text-green-900">&times;</button>
+                        </div>
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div x-data="{show: true}" x-show="show" class="max-w-7xl mx-auto mt-4 px-4 sm:px-6 lg:px-8">
+                        <div class="bg-red-100 border border-red-300 text-red-800 rounded px-4 py-3 flex items-center justify-between">
+                            <span>{{ session('error') }}</span>
+                            <button @click="show = false" class="ml-4 text-red-800 hover:text-red-900">&times;</button>
+                        </div>
+                    </div>
+
+                @endif
                 {{ $slot }}
             </main>
         </div>
