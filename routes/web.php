@@ -85,6 +85,10 @@ Route::middleware(['auth', 'customer'])
         Route::get('reservations', [PortalController::class, 'reservations'])->name('reservations');
         Route::post('reservieren', [PortalController::class, 'reserve'])
             ->name('reserve');
+        Route::patch('reservations/{reservation}/stornieren', [PortalController::class, 'cancel'])
+            ->name('reservations.cancel');
+        Route::patch('reservation-items/{item}', [PortalController::class, 'updateItem'])
+            ->name('items.update');
     });
 
     Route::middleware('role:administrator')->group(function () {

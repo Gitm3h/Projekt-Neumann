@@ -9,7 +9,7 @@ class ReservationController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with(['customer', 'article'])->latest()->get();
+        $reservations = Reservation::with(['customer', 'items.article'])->latest()->get();
         return view('reservations.index', ['reservations' => $reservations]);
     }
 

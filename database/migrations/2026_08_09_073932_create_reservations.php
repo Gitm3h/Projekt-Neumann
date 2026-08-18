@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers');
-            $table->foreignId('article_id')->constrained('articles');
-            $table->integer('quantity');
             $table->string('status')->default('reserviert');
             $table->date('date')->nullable();
             $table->timestamps();
