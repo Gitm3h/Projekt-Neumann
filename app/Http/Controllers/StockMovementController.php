@@ -30,6 +30,16 @@ class StockMovementController extends Controller
         ]);
 
         $article = Article::findOrFail($data['article_id']);
+        $stock = Stock::where('article_id', $article->id)->first();
+
+        if ($data['type'] === 'Ausgang')
+        {
+            $available = $stock ? $stock->quantity : 0;
+            if ($data['quantity'] > $available)
+            {
+                return back()->withErrors(['quantity' => "Nicht genügend Bestand für \"{$article->name}\" (verfügbar: {$available})."]);
+            }
+        }
 
         StockMovement::create([
             'article_id' => $article->id,
@@ -39,19 +49,24 @@ class StockMovementController extends Controller
             'date' => now(),
         ]);
 
-        $stock = Stock::where('article_id', $article->id)->first();
         if ($stock)
         {
-            if ($data['type'] == 'Eingang')
-            {
-                $stock->quantity = $stock->quantity + $data['quantity'];
-            }
-            else
-            {
-                $stock->quantity = $stock->quantity - $data['quantity'];
-            }
-            $stock->save();
+           if ($data['type'] === 'Eingang')
+           {
+               $stock->quantity = $stock->quantity + $data['quantity'];
+           }
+           else
+           {
+               $stock->quantity = $stock->quantity - $data['quantity'];
+           }
+           $stock->save();
         }
+
+        else if ($data['type'] === 'Eingang')
+        {
+            //
+        }
+
         return redirect()->route('stock-movements.index');
     }
 
