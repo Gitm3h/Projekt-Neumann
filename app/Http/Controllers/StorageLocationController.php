@@ -35,7 +35,7 @@ class StorageLocationController extends Controller
     }
 
     public function show($id) {
-        $location = StorageLocation::with('stocks.articles')->findOrFail($id);
+        $location = StorageLocation::with('stocks.article')->findOrFail($id);
         return view('storage-locations.show', ['location' => $location]);
     }
 }
