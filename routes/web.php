@@ -64,6 +64,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
 
     Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
         Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store','destroy']);
+        Route::get('stock', [StockController::class, 'index'])->name('stock.index');
     });
 
     Route::middleware('role:administrator,kassenkraft,lagermitarbeiter,spediteur')->group(function () {

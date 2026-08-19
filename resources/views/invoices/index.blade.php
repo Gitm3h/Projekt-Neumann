@@ -19,13 +19,20 @@
                         <td class="p-3">{{ \Carbon\Carbon::parse($inv->date)->format('d.m.Y') }}</td>
                         <td class="p-3">{{ $inv->status}}</td>
                         <td class="p-3">
-                            @if($inv->status === 'offen')
-                                <form action="{{ route('invoices.paid', $inv) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button class="text-teal-700 hover:text-teal-800">als bezahlt markieren</button>
-                                </form>
-                            @endif
+                            <div class="flex items-center gap-4">
+                                 @if ($inv->sale)
+                                     <a href="{{ route('invoices.pdf', $inv->sale) }}" target="_blank" class="text-teal-700 hover:underline">
+                                         Rechnung (PDF)
+                                     </a>
+                                 @endif
+                                 @if($inv->status === 'offen')
+                                     <form action="{{ route('invoices.paid', $inv) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button class="text-teal-700 hover:text-teal-800">als bezahlt markieren</button>
+                                     </form>
+                                 @endif
+                            </div>
                         </td>
                     </tr>
                 @endforeach
