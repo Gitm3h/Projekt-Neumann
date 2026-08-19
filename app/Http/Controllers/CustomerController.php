@@ -3,33 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\Customer;
+use App\Models\User;
+
 
 class CustomerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         return view('customers.index', ['customers' => Customer::orderBy('name')->get()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('customers.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
             'type' => ['required', 'in:privat,gewerblich'],
             'street' => ['nullable', 'string'],
             'house_number' => ['nullable', 'string'],
@@ -37,33 +36,47 @@ class CustomerController extends Controller
             'city' => ['nullable', 'string'],
             'vat_id' => ['nullable', 'string'],
         ]);
-        Customer::create($data);
-        return redirect()->route('customers.index')->with('success', 'Kunde gespeichert');
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'role' => 'kunde',
+            'must_change_password' => true,
+        ]);
+
+        Customer::create([
+            'user_id' => $user->id,
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'street' => $data['street'] ?? null,
+            'house_number' => $data['house_number'] ?? null,
+            'postal_code' => $data['postal_code'] ?? null,
+            'city' => $data['city'] ?? null,
+            'vat_id' => $data['vat_id'] ?? null,
+        ]);
+
+        return redirect()->route('customers.index')->with('success', 'Kunde und Portal-Login angelegt');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Customer $customer)
     {
         return view('customers.edit', ['customer' => $customer]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Customer $customer)
     {
+        $user = $customer->users;
+
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
+            'password' => ['nullable', 'string', 'min:8'],
             'type' => ['required', 'in:privat,gewerblich'],
             'street' => ['nullable', 'string'],
             'house_number' => ['nullable', 'string'],
@@ -71,15 +84,52 @@ class CustomerController extends Controller
             'city' => ['nullable', 'string'],
             'vat_id' => ['nullable', 'string'],
         ]);
-        $customer->update($data);
+
+        if ($user) {
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            if (! empty($data['password'])) {
+                $user->password = $data['password'];
+            }
+            $user->save();
+        }
+
+        $customer->update([
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'street' => $data['street'] ?? null,
+            'house_number' => $data['house_number'] ?? null,
+            'postal_code' => $data['postal_code'] ?? null,
+            'city' => $data['city'] ?? null,
+            'vat_id' => $data['vat_id'] ?? null,
+        ]);
+
         return redirect()->route('customers.index')->with('success', 'Kunde gespeichert');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Customer $customer)
     {
-        //
+        $user = $customer->users;
+        $customer->delete();
+        $user?->delete();
+
+        return redirect()->route('customers.index')->with('success', 'Kunde gelöscht');
+    }
+
+    public function resetPassword(Customer $customer)
+    {
+        $user = $customer->users;
+
+        if (! $user) {
+            return back()->with('status', 'Dieser Kunde hat keinen Portal_login.');
+        }
+
+        $newPassword = Str::random(10);
+        $user->update([
+            'password' => $newPassword,
+            'must_change_password' => true,
+        ]);
+
+        return redirect()->route('customers.index')->with('status', 'Neues Passwort für' . ': ' . $newPassword);
     }
 }

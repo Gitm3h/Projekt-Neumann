@@ -37,11 +37,11 @@
 
                         <button type="button" x-data
                                 @click="$dispatch('open-modal', 'delete-user-{{ $user->id }}')"
-                                class="text-red-600 hover:text-red-700">Löschen?</button>
+                                class="text-red-600 hover:text-red-700">Löschen</button>
 
                         <x-modal name="delete-user-{{ $user->id }}" :show="false" maxWidth="md">
                             <div class="p-6">
-                                <h2 class="text-lg font-semibold text-gray-800">Nutzer löschen?</h2>
+                                <h2 class="text-lg font-semibold text-gray-800">Nutzer wirklich löschen?</h2>
                                 <p class="mt-2 text-sm text-gray-600">
                                     "{{ $user->name }}" wird dauerhaft gelöscht. Das lässt sich nicht rückgängig machen.
                                 </p>
