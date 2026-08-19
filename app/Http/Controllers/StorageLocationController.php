@@ -30,7 +30,12 @@ class StorageLocationController extends Controller
         return redirect()->route('storage-locations.index')->with('success', 'Lagerplatz aktualisiert');
     }
     public function destroy($id) {
-        StorageLocation::findOrFail($id)->delete();
+        try {
+            StorageLocation::findOrFail($id)->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('storage-locations.index')->with('error', 'Lagerplatz kann nicht gelöscht werden, da er noch Bestand enthält.');
+        }
+
         return redirect()->route('storage-locations.index')->with('success', 'Lagerplatz gelöscht');
     }
 
