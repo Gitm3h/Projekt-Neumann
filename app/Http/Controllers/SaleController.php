@@ -69,6 +69,18 @@ class SaleController extends Controller
                 'vat_rate' => $article->vat_rate,
             ]);
 
+            $total = 0;
+            foreach ($lines as $row)
+            {
+                $article = Article::findOrFail($row['article_id']);
+                $available = $article->stocks->sum('quantity');
+                if ($row['quantity'] > $available)
+                {
+                    return back()->withErrors(['items' => "„{$article->name}\" ist nicht ausreichend auf Lager (verfügbar: {$available}, angefordert: {$row['quantity']})."]);
+                }
+                $total += $article->price * $row['quantity'];
+            }
+
             $stock = Stock::where('article_id', $article->id)->first();
             if ($stock) {
                 $stock->quantity = $stock->quantity - $row['quantity'];

@@ -9,6 +9,11 @@
               class="bg-white p-6 rounded shadow space-y-4">
 
             @csrf
+
+            @error('quantity')
+                <p class="text-red-600 text-sm">{{ $message }}</p>
+            @enderror
+
             <div>
                 <label class="block mb-1">Artikel</label>
                 <select name='article_id' class="w-full border rounded p-2">

@@ -52,6 +52,10 @@
 
             </div>
 
+            @error('items')
+            <p class="text-red-600 text-sm mb-2">{{ $message }}</p>
+            @enderror
+
             <button class="px-6 py-3 text-lg bg-teal-700 hover:bg-teal-800 transition text-white rounded">Verkauf buchen</button>
         </form>
     </div>

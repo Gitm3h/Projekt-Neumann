@@ -24,7 +24,7 @@ class InvoiceController extends Controller
 
     public function markPaid(Invoice $invoice)
     {
-        $invoice->update(['status' => 'bezahlt']);
+        $invoice->update(['status' => 'bezahlt', 'paid_at' => now()]);
         return back();
     }
 }
