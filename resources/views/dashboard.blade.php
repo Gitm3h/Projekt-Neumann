@@ -54,6 +54,11 @@
                     <div class="text-teal-700 font-semibold">Buchungen</div>
                     <div class="text-gray-500 text-sm">Warenein- und -ausgänge buchen</div>
                 </a>
+                <a href="{{ route('stock.index') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">Bestand</div>
+                    <div class="text-gray-500 text-sm">Artikel und Bestand einsehen</div>
+                </a>
                 <a href="{{ route('reports.low-stock') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-red-600 font-semibold">{{ $lowStock ?? 0 }} Artikel</div>
@@ -64,6 +69,11 @@
 
         @if ($role === 'spediteur')
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="{{ route('stock.index') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">Bestand</div>
+                    <div class="text-gray-500 text-sm">Artikel und Bestand einsehen</div>
+                </a>
                 <a href="{{ route('stock-movements.deliveries') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-teal-700 font-semibold">Lieferungen</div>
@@ -74,11 +84,26 @@
                     <div class="text-teal-700 font-semibold">Buchungen</div>
                     <div class="text-gray-500 text-sm">Buchungen ansehen</div>
                 </a>
+                <a href="{{ route('reports.low-stock') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">{{ $lowStock ?? 0 }} Artikel</div>
+                    <div class="text-gray-500 text-sm">unter Mindestbestand</div>
+                </a>
             </div>
         @endif
 
         @if ($role === 'administrator')
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="{{ route('customers.index') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">Kunden</div>
+                    <div class="text-gray-500 text-sm">Kunden verwalten</div>
+                </a>
+                <a href="{{ route('users.index') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">Benutzer</div>
+                    <div class="text-gray-500 text-sm">Benutzer verwalten</div>
+                </a>
                 <a href="{{ route('articles.index') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-teal-700 font-semibold">Artikel</div>
@@ -108,16 +133,6 @@
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-teal-700 font-semibold">Z-Bericht</div>
                     <div class="text-gray-500 text-sm">Tagesabschluss ansehen</div>
-                </a>
-                <a href="{{ route('users.index') }}"
-                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                <div class="text-teal-700 font-semibold">Benutzer</div>
-                <div class="text-gray-500 text-sm">Benutzer verwalten</div>
-                </a>
-                <a href="{{ route('reports.low-stock') }}"
-                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                    <div class="text-red-600 font-semibold">{{ $lowStock ?? 0 }} Artikel</div>
-                    <div class="text-gray-500 text-sm">unter Mindestbestand</div>
                 </a>
             </div>
         @endif
