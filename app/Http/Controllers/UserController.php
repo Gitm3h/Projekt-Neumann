@@ -10,7 +10,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('users.index', ['users' => User::orderBy('name')->get()]);
+        $users = User::whereIn('role', ['administrator', 'spediteur', 'kassenkraft', 'lagermitarbeiter'])->orderBy('name')->get();
+
+        return view('users.index', ['users' => $users]);
     }
 
     public function create()

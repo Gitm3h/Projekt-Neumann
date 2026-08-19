@@ -22,10 +22,10 @@
                 <input name="name" value="{{ old('name') }}" class="w-full border rounded p-2">
             </div>
             <div><label class="block mb-1">E-Mail</label>
-                <input name="email" type="email" value="{{ old('email') }}" class="w-full border rounded p-2">
+                <input name="email" type="email" autocomplete="off" value="{{ old('email') }}" class="w-full border rounded p-2">
             </div>
             <div><label class="block mb-1">Passwort</label>
-                <input name="password" type="password" class="w-full border rounded p-2">
+                <input name="password" type="password" autocomplete="new-password" class="w-full border rounded p-2">
             </div>
             <div><label class="block mb-1">Rolle</label>
                 <select name="role" class="w-full border rounded p-2">

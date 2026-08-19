@@ -22,6 +22,15 @@
             <div><label class="block mb-1">Name</label>
                 <input name="name" value="{{ old('name') }}" class="w-full border rounded p-2">
             </div>
+            <div><label class="block mb-1">E-Mail (Portal-Login)</label>
+                <input name="email" type="email" autocomplete="off" value="{{ old('email') }}" class="w-full border rounded p-2">
+            </div>
+            <div><label class="block mb-1">Passwort (Portal-Login)</label>
+                <input name="password" type="password" autocomplete="new-password" class="w-full border rounded p-2">
+            </div>
+
+
+
             <div><label class="block mb-1">Art</label>
                 <select name="type" class="w-full border rounded p-2">
                     <option value="privat" @selected(old('type') === 'privat')>privat</option>
