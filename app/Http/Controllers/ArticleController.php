@@ -57,7 +57,7 @@ class ArticleController extends Controller
          ]
      );
      Article::create($data);
-     return redirect()->route('articles.index')->with('success', 'Artikel gespeichert.');
+     return redirect()->route('articles.index');
     }
 
     public function edit(Article $article)
@@ -92,7 +92,7 @@ class ArticleController extends Controller
              ]
         );
         $article->update($data);
-        return redirect()->route('articles.index')->with('success', 'Artikel aktualisiert.');
+        return redirect()->route('articles.index');
     }
 
     public function show(Article $article)
@@ -103,7 +103,12 @@ class ArticleController extends Controller
 
     public function destroy(Article $article)
     {
-        $article->delete();
+        try {
+            $article->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('articles.index')->with('error', 'Artikel kann nicht gelöscht werden, da er noch in Bestellungen/Reservierungen referenziert wird.');
+        }
+
         return redirect()->route('articles.index')->with('success', 'Artikel gelöscht');
     }
 }
