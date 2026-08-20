@@ -70,6 +70,14 @@ class StockMovementController extends Controller
         return redirect()->route('stock-movements.index');
     }
 
+    public function destroy(StockMovement $stockMovement)
+    {
+        $stockMovement->delete();
+        return redirect()->route('stock-movements.index')
+        ->with('success', 'Buchung gelöscht.');
+
+    }
+
     public function deliveries()
     {
         $lieferungen = StockMovement::with(['article', 'user'])
