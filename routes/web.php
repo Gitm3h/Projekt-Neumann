@@ -55,6 +55,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::get('inventory', [ArticleController::class, 'stock'])->name('articles.stock');
         Route::get('invoices', [InvoiceController::class, 'index'])->name('invoices.index');
         Route::patch('invoices/{invoice}/bezahlt', [InvoiceController::class, 'markPaid'])->name('invoices.paid');
+        Route::delete('invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
     });
 
     Route::middleware('role:lagermitarbeiter,administrator')->group(function () {
