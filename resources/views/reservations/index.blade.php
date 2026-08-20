@@ -32,19 +32,6 @@
                                 <option value="abgeholt" @selected($r->status === 'abgeholt')>abgeholt</option>
                                 <option value="storniert" @selected($r->status === 'storniert')>storniert</option>
                             </select>
-                        </form>
-                        <div class="flex items-center gap-4">
-                            <!-- Status Dropdown -->
-                            <form action="{{ route('reservations.update', $r) }}" method="POST" class="inline">
-                                @csrf
-                                @method('PATCH')
-                                <select name="status" onchange="this.form.submit()"
-                                        class="border rounded p-1">
-                                    <option value="reserviert" @selected($r->status === 'reserviert')>reserviert</option>
-                                    <option value="abgeholt" @selected($r->status === 'abgeholt')>abgeholt</option>
-                                    <option value="storniert" @selected($r->status === 'storniert')>storniert</option>
-                                </select>
-                            </form>
 
                             <!-- Delete Button - Only for abgeholt or storniert -->
                             @if($r->status === 'abgeholt' || $r->status === 'storniert')
