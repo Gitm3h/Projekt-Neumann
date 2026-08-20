@@ -19,4 +19,26 @@ class ReservationController extends Controller
         $reservation->update(['status' => $data['status']]);
         return back()->with('success', 'Status aktualisiert');
     }
+
+    /**
+     * Delete a reservation (only if status is abgeholt or storniert)
+     */
+    public function destroy(Reservation $reservation)
+    {
+        if (!in_array($reservation->status, ['abgeholt', 'storniert'])) {
+            return back()->withErrors([
+                'error' => 'Reservierung kann nur gelöscht werden, wenn sie abgeholt oder storniert ist.'
+            ]);
+        }
+
+          $reservation->items()->delete();
+
+
+        $reservation->delete();
+
+        return redirect()->route('reservations.index')
+            ->with('success', 'Reservierung gelöscht.');
+    }
+
+
 }
