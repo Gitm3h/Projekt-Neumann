@@ -120,7 +120,7 @@
                     <div class="text-gray-500 text-sm">Warenein- und -ausgänge buchen</div>
                 </a>
                 <a href="{{ route('sales.index') }}"
-                   class="bg-white p-6 rounded shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-teal-700 font-semibold">Kasse</div>
                     <div class="text-gray-500 text-sm">Verkäufe ansehen</div>
                 </a>

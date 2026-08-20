@@ -14,7 +14,7 @@
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Anzeigen</button>
             </form>
             <a href="{{ route('reports.z.pdf', ['datum' => $datum]) }}" target="_blank"
-               class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded">Als PDF</a>
+               class="text-teal-700 hover:underline">PDF</a>
         </div>
         <div class="bg-white p-6 rounded shadow">
             <p>Anzahl Verkäufe: <b>{{ $anzahl }}</b></p>
