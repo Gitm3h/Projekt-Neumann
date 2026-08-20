@@ -27,4 +27,10 @@ class InvoiceController extends Controller
         $invoice->update(['status' => 'bezahlt', 'paid_at' => now()]);
         return back();
     }
+
+    public function destroy(Invoice $invoice)
+    {
+        $invoice->delete();
+        return redirect()->route('invoices.index')->with('success', 'Rechnung gelöscht');
+    }
 }

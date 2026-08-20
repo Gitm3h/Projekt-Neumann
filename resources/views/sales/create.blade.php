@@ -10,8 +10,8 @@
 
             @csrf
             <div id="positionen" class="space-y-3">
-                <div class="position flex items-center gap-3">
-                    <select name="items[0][article_id]" class="article flex-1 border rounded p-3 text-base">
+                <div class="position flex flex-wrap items-center gap-3">
+                    <select name="items[0][article_id]" class="article w-full sm_w-auto flex-1 border rounded p-3 text-base">
                         <option value="" data-price="0">-- Artikel wählen --</option>
                         @foreach ($articles as $article)
                             <option value="{{ $article->id }}" data-price="{{ $article->price }}">{{ $article->name }} ({{ number_format($article->price, 2, ',','.') }} EUR)</option>
