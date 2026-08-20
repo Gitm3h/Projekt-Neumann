@@ -27,4 +27,5 @@ class InvoiceController extends Controller
         $invoice->update(['status' => 'bezahlt', 'paid_at' => now()]);
         return back();
     }
+
 }

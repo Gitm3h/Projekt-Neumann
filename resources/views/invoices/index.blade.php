@@ -32,6 +32,7 @@
                                         <button class="text-teal-700 hover:text-teal-800">als bezahlt markieren</button>
                                      </form>
                                  @endif
+
                             </div>
                         </td>
                     </tr>

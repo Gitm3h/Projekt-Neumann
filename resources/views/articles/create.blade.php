@@ -25,9 +25,9 @@
             <div><input name="price" placeholder="Preis in EUR" class="w-full border rounded p-2"></div>
             <div><input name="vat_rate" placeholder="MwSt-Satz in %" class="w-full border rounded p-2"></div>
             <div><input name="min_stock" placeholder="Mindestbestand" class="w-full border rounded p-2"></div>
-            <div><input name="size" placeholder="Größe" class="w-full border rounded p-2"></div>
+            <div><input name="size" placeholder="Größe in cm" class="w-full border rounded p-2"></div>
             <div><input name="colour" placeholder="Farbe" class="w-full border rounded p-2"></div>
-            <div><input name="weight" placeholder="Gewicht" class="w-full border rounded p-2"></div>
+            <div><input name="weight" placeholder="Gewicht in kg" class="w-full border rounded p-2"></div>
             <div><input name="model_year" placeholder="Modelljahr" class="w-full border rounded p-2"></div>
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
         </form>

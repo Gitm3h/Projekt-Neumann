@@ -27,7 +27,7 @@
                             @csrf
                             @method('PATCH')
                             <select name="status" onchange="this.form.submit()"
-                                    class="border rounded p-1">
+                                    class="w-40 border rounded px-3 py-2">
                                 <option value="reserviert" @selected($r->status === 'reserviert')>reserviert</option>
                                 <option value="abgeholt" @selected($r->status === 'abgeholt')>abgeholt</option>
                                 <option value="storniert" @selected($r->status === 'storniert')>storniert</option>
