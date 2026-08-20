@@ -23,23 +23,13 @@
                     </td>
                     <td class="p-3">{{ $r->status }}</td>
                     <td class="p-3">
-                        <form action="{{ route('reservations.update', $r) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <select name="status" onchange="this.form.submit()"
-                                    class="w-40 border rounded px-3 py-2">
-                                <option value="reserviert" @selected($r->status === 'reserviert')>reserviert</option>
-                                <option value="abgeholt" @selected($r->status === 'abgeholt')>abgeholt</option>
-                                <option value="storniert" @selected($r->status === 'storniert')>storniert</option>
-                            </select>
-                        </form>
                         <div class="flex items-center gap-4">
                             <!-- Status Dropdown -->
-                            <form action="{{ route('reservations.update', $r) }}" method="POST" class="inline">
+                            <form action="{{ route('reservations.update', $r) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
                                 <select name="status" onchange="this.form.submit()"
-                                        class="border rounded p-1">
+                                        class="w-40 border rounded px-3 py-2">
                                     <option value="reserviert" @selected($r->status === 'reserviert')>reserviert</option>
                                     <option value="abgeholt" @selected($r->status === 'abgeholt')>abgeholt</option>
                                     <option value="storniert" @selected($r->status === 'storniert')>storniert</option>
