@@ -31,7 +31,30 @@
                                         @method('PATCH')
                                         <button class="text-teal-700 hover:text-teal-800">als bezahlt markieren</button>
                                      </form>
-                                 @endif
+                                     @endif
+                                     <button type="button" x-data
+                                     @click="$dispatch('open-modal', 'delete-invoice-{{ $inv->id }}')"
+                                     class="text-red-600 hover:text-red-700">Löschen</button>
+
+                                     <x-modal name="delete-invoice-{{ $inv->id }}" :show="false" maxWidth="md">
+                                         <div class="p-6">
+                                             <h2 class="text-lg font-semibold text-gray-800">Rechnung löschen?</h2>
+                                             <p class="mt-2 text-sm text-gray-600">
+                                                 Rechnung Nr. {{ $inv->invoice_number }} für "{{ $inv->customer?->name }}" wird dauerhaft gelöscht. Das lässt sich nicht rückgängig machen.
+                                             </p>
+                                             <div class="mt-6 flex justify-end gap-2">
+                                                 <button type="button" x-on:click="$dispatch('close')"
+                                                         class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded">Abbrechen</button>
+                                                 <form action="{{ route('invoices.destroy', $inv) }}" method="POST">
+                                                     @csrf
+                                                     @method('DELETE')
+                                                     <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Löschen</button>
+                                                 </form>
+
+                                             </div>
+                                         </div>
+                                     </x-modal>
+
                             </div>
                         </td>
                     </tr>
