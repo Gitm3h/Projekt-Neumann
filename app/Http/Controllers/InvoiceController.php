@@ -28,4 +28,9 @@ class InvoiceController extends Controller
         return back();
     }
 
+    public function destroy(Invoice $invoice)
+    {
+        $invoice->delete();
+        return redirect()->route('invoices.index')->with('success', 'Rechnung gelöscht');
+    }
 }

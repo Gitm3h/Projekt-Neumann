@@ -110,7 +110,11 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $user = $customer->users;
-        $customer->delete();
+        try {
+            $customer->delete();
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('customers.index')->with('error', 'Kunde kann nicht gelöscht werden, da noch Rechnungen vorhanden sind.');
+        }
         $user?->delete();
 
         return redirect()->route('customers.index')->with('success', 'Kunde gelöscht');
