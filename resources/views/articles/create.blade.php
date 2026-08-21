@@ -20,15 +20,44 @@
                 </div>
             @endif
 
-            <div><input name="name" placeholder="Bezeichnung" class="w-full border rounded p-2"></div>
-            <div><input name="type" placeholder="Art" class="w-full border rounded p-2"></div>
-            <div><input name="price" placeholder="Preis in EUR" class="w-full border rounded p-2"></div>
-            <div><input name="vat_rate" placeholder="MwSt-Satz in %" class="w-full border rounded p-2"></div>
-            <div><input name="min_stock" placeholder="Mindestbestand" class="w-full border rounded p-2"></div>
-            <div><input name="size" placeholder="Größe in cm" class="w-full border rounded p-2"></div>
-            <div><input name="colour" placeholder="Farbe" class="w-full border rounded p-2"></div>
-            <div><input name="weight" placeholder="Gewicht in kg" class="w-full border rounded p-2"></div>
-            <div><input name="model_year" placeholder="Modelljahr" class="w-full border rounded p-2"></div>
+            <div>
+                <lable class="block mb-1">Bezeichnung</lable>
+                <input name="name" value="{{ old('name') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Art / Kategorie</lable>
+                <input name="type" value="{{ old('type') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Preis in EUR</lable>
+                <input name="price" value="{{ old('price') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">MwSt-Satz in %</lable>
+                <input name="vat_rate" value="{{ old('vat_rate') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Mindestbestand</lable>
+                <input name="min_stock" value="{{ old('min_stock') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Größe in cm</lable>
+                <input name="size" value="{{ old('size') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Farbe</lable>
+                <input name="colour" value="{{ old('coulour') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Gewicht in kg</lable>
+                <input name="weight" value="{{ old('weight') }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <lable class="block mb-1">Modelljahr</lable>
+                <input name="model_year" value="{{ old('model_year') }}" class="w-full border rounded p-2">
+            </div>
+
+
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
         </form>
     </div>
