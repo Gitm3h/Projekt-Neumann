@@ -18,15 +18,44 @@
                     </ul>
                 </div>
             @endif
-            <div><input name="name" placeholder="Bezeichnung" value="{{ $article->name }}" class="w-full border rounded p-2"></div>
-            <div><input name="type" placeholder="Art" value="{{ $article->type }}" class="w-full border rounded p-2"></div>
-            <div><input name="price" placeholder="Preis in EUR" value="{{ $article->price }}" class="w-full border rounded p-2"></div>
-            <div><input name="vat_rate" placeholder="MwSt-Satz in %" value="{{ $article->vat_rate }}" class="w-full border rounded p-2"></div>
-            <div><input name="min_stock" placeholder="Mindestbestand" value="{{ $article->min_stock }}" class="w-full border rounded p-2"></div>
-            <div><input name="size" placeholder="Größe" value="{{ $article->size }}" class="w-full border rounded p-2"></div>
-            <div><input name="colour" placeholder="Farbe" value="{{ $article->colour }}" class="w-full border rounded p-2"></div>
-            <div><input name="weight" placeholder="Gewicht" value="{{ $article->weight }}" class="w-full border rounded p-2"></div>
-            <div><input name="model_year" placeholder="Modelljahr" value="{{ $article->model_year }}" class="w-full border rounded p-2"></div>
+
+            <div>
+                <label class="block mb-1">Bezeichnung</label>
+                <input name="name" value="{{ $article->name }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Art / Kategorie</label>
+                <input name="type" value="{{ $article->type }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Preis in EUR</label>
+                <input name="price" value="{{ $article->price }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">MwSt-Satz in %</label>
+                <input name="vat_rate" value="{{ $article->vat_rate }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Mindestbestand</label>
+                <input name="min_stock" value="{{ $article->min_stock }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Größe in cm</label>
+                <input name="size" value="{{ $article->size }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Farbe</label>
+                <input name="colour" value="{{ $article->colour }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Gewicht in kg</label>
+                <input name="weight" value="{{ $article->weight }}" class="w-full border rounded p-2">
+            </div>
+            <div>
+                <label class="block mb-1">Modelljahr</label>
+                <input name="model_year" value="{{ $article->model_year }}" class="w-full border rounded p-2">
+            </div>
+
 
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
         </form>
