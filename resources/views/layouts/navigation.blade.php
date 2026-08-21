@@ -21,7 +21,7 @@
                     @if (auth()->user()->role === 'administrator')
                         <x-dropdown align="left" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out
+                                <button class="inline-flex items-center h-16 px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out
                                  {{ request()->routeIs('articles.*','storage-locations.*','stock-movements.*') ? 'border-teal-500 text-gray-900': 'border-transparent text-gray-500
                                  hover:text-teal-700 hover:border-teal-300' }}">
                                     Lager
@@ -41,7 +41,7 @@
 
                         <x-dropdown align="left" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out
+                                <button class="inline-flex items-center h-16 px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out
                                  {{ request()->routeIs('sales.*','reservations.*','reports.z','invoices.index') ? 'border-teal-500 text-gray-900': 'border-transparent text-gray-500
                                  hover:text-teal-700 hover:border-teal-300' }}">
                                     Verkauf
@@ -60,7 +60,7 @@
 
                         <x-dropdown align="left" width="48">
                             <x-slot name="trigger">
-                                <button class="inline-flex items-center px-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out
+                                <button class="inline-flex items-center h-16 px-1 pt-1 border-b-2 text-sm font-medium leading-5 focus:outline-none transition duration-150 ease-in-out
                                  {{ request()->routeIs('customers.*','users.*') ? 'border-teal-500 text-gray-900': 'border-transparent text-gray-500
                                  hover:text-teal-700 hover:border-teal-300' }}">
                                     Verwaltung
