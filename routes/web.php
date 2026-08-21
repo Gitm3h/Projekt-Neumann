@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
 
     Route::middleware('role:lagermitarbeiter,administrator')->group(function () {
         Route::resource('articles', ArticleController::class);
+        Route::resource('categories', CategoryController::class);
         Route::get('stock', [StockController::class, 'index'])->name('stock.index');
         Route::resource('storage-locations', StorageLocationController::class);
     });

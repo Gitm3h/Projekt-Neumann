@@ -32,10 +32,12 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('articles.index')">Artikel</x-dropdown-link>
+                                <x-dropdown-link :href="route('categories.index')">Kategorien</x-dropdown-link>
                                 <x-dropdown-link :href="route('storage-locations.index')">Lagerplatz</x-dropdown-link>
                                 <x-dropdown-link :href="route('stock-movements.index')">Buchungen</x-dropdown-link>
                                 <x-dropdown-link :href="route('stock-movements.deliveries')">Lieferungen</x-dropdown-link>
                                 <x-dropdown-link :href="route('articles.stock')">Bestand</x-dropdown-link>
+
                             </x-slot>
                         </x-dropdown>
 
@@ -110,6 +112,9 @@
                     @if (auth()->user()->role === 'lagermitarbeiter')
                         <x-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                             {{ __('Artikel') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                            {{ __('Kategorien') }}
                         </x-nav-link>
                         <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                             {{ __('Lagerplätze') }}
@@ -189,7 +194,6 @@
                 </x-responsive-nav-link>
             @endif
 
-
             @if (in_array(auth()->user()->role, ['administrator','spediteur']))
                 <x-responsive-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
                     {{ __('Lieferungen') }}
@@ -200,6 +204,9 @@
                 <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                     {{ __('Artikel') }}
                  </x-responsive-nav-link>
+                <x-responsive-nav-link :hre="route('categories.index')" :active="request()->routeIs('categories.index')">
+                    {{ __('Kategorien') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                     {{ __('Lagerplätze') }}
                 </x-responsive-nav-link>
