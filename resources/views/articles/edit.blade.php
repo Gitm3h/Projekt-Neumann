@@ -25,8 +25,17 @@
             </div>
             <div>
                 <label class="block mb-1">Art / Kategorie</label>
-                <input name="type" value="{{ $article->type }}" class="w-full border rounded p-2">
+                <select name="type" class="w-full border rounded p-2">
+                    <option value="">-- Kategorie wählen --</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}"
+                            @selected(old('type', $article->type ?? '') === $category->name)>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+
             <div>
                 <label class="block mb-1">Preis in EUR</label>
                 <input name="price" value="{{ $article->price }}" class="w-full border rounded p-2">

@@ -21,39 +21,48 @@
             @endif
 
             <div>
-                <lable class="block mb-1">Bezeichnung</lable>
+                <label class="block mb-1">Bezeichnung</label>
                 <input name="name" value="{{ old('name') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">Art / Kategorie</lable>
-                <input name="type" value="{{ old('type') }}" class="w-full border rounded p-2">
+                <label class="block mb-1">Art / Kategorie</label>
+                <select name="type" class="w-full border rounded p-2">
+                    <option value="">-- Kategorie wählen --</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}"
+                        @selected(old('type', $article->type ?? '') === $category->name)>
+                        {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
+
             <div>
-                <lable class="block mb-1">Preis in EUR</lable>
+                <label class="block mb-1">Preis in EUR</label>
                 <input name="price" value="{{ old('price') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">MwSt-Satz in %</lable>
+                <label class="block mb-1">MwSt-Satz in %</label>
                 <input name="vat_rate" value="{{ old('vat_rate') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">Mindestbestand</lable>
+                <label class="block mb-1">Mindestbestand</label>
                 <input name="min_stock" value="{{ old('min_stock') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">Größe in cm</lable>
+                <label class="block mb-1">Größe in cm</label>
                 <input name="size" value="{{ old('size') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">Farbe</lable>
-                <input name="colour" value="{{ old('coulour') }}" class="w-full border rounded p-2">
+                <label class="block mb-1">Farbe</label>
+                <input name="colour" value="{{ old('colour') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">Gewicht in kg</lable>
+                <label class="block mb-1">Gewicht in kg</label>
                 <input name="weight" value="{{ old('weight') }}" class="w-full border rounded p-2">
             </div>
             <div>
-                <lable class="block mb-1">Modelljahr</lable>
+                <label class="block mb-1">Modelljahr</label>
                 <input name="model_year" value="{{ old('model_year') }}" class="w-full border rounded p-2">
             </div>
 
