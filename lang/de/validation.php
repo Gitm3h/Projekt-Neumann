@@ -26,4 +26,12 @@ return [
         'email' => 'E-Mail-Adresse',
         'password' => 'Passwort',
     ],
+
+    'password' => [
+        'letters' => ':attribute muss mindestens einen Buchstaben enthalten.',
+        'mixed' => ':attribute muss Groß- und Kleinbuchstaben enthalten.',
+        'numbers' => ':attribute muss mindestens eine Zahl enthalten.',
+        'symbols' => ':attribute muss mindestens ein Sonderzeichen enthalten.',
+        'uncompromised' => ':attribute ist in einem Datenleck aufgetaucht. Bitte ein anderes Passwort wählen.',
+        ],
 ];
