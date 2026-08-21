@@ -18,7 +18,10 @@ class SaleController extends Controller
 
     public function create()
     {
-        $articles = Article::orderBy('name')->get();
+        $articles = Article::with('stocks')->orderBy('name')->get()
+            ->filter(fn ($a) => $a->stocks->sum('quantity') > 0)
+            ->values();
+
         $customers = Customer::orderBy('name')->get();
         return view('sales.create', ['articles'=>$articles, 'customers'=>$customers]);
     }
