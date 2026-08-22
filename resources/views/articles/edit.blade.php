@@ -68,24 +68,24 @@
 
             <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
         </form>
-        <div class="flex items-center gap-3">
-            <form action="{{ route('stock-movements.store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="article_id" value="{{ $article->id }}">
-                <input type="hidden" name="type" value="Ausgang">
-                <input type="hidden" name="quantity" value="1">
-                <button class="px-3 py-1 bg-gray-200 rounded">-</button>
-            </form>
+        <div class="mt-6 bg-white p-6 rounded shadow"
+             x-data="{ current: {{ $article->stocks->sum('quantity') }}, change: 0 }">
+            <label class="block mb-2 font-medium">Bestand anpassen</label>
+            <div class="flex items-center gap-3">
+                <button type="button" @click="if (current + change > 0) change--" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-lg">-</button>
 
-            <span>Bestand: {{ $article->stocks->sum('quantity') }}</span>
+                <span class="text-xl font-semibold w-16 text-center" x-text="current + change"></span>
+                <button type="button" @click="change++" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-lg">+</button>
 
-            <form action="{{ route('stock-movements.store') }}" method="POST">
-                @csrf
-                <input type="hidden" name="article_id" value="{{ $article->id }}">
-                <input type="hidden" name="type" value="Eingang">
-                <input type="hidden" name="quantity" value="1">
-                <button class="px-3 py-1 bg-gray-200 rounded">+</button>
-            </form>
+                <form action="{{ route('stock-movements.store') }}" method="POST" x-show="change !==0" class="ms-3">
+                    @csrf
+                    <input type="hidden" name="article_id" value="{{ $article->id }}">
+                    <input type="hidden" name="type" :value="change > 0 ? 'Eingang' : 'Ausgang'">
+                    <input type="hidden" name="quantity" :value="Math.abs(change)">
+                    <button class="px-4 py-2 bg-teal-700 hover:bg-teal-800 transition text-white rounded">Speichern</button>
+                </form>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">Menge mit + und - anpassen, mit "Speichern" buchen</p>
 
         </div>
     </div>
