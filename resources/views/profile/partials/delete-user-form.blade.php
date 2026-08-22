@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __('Sobald Ihr Konto gelöscht ist, werden alle zugehörigen Daten dauerhaft entfernt. Bitte sichern Sie alles Informationen, die Sie behalten möchten.') }}
+            {{ __('Sobald Ihr Konto gelöscht ist, werden alle zugehörigen Daten dauerhaft entfernt. Bitte sichern Sie alle Informationen, die Sie behalten möchten.') }}
         </p>
     </header>
 
