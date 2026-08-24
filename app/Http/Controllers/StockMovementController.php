@@ -82,6 +82,11 @@ class StockMovementController extends Controller
 
     public function destroy(StockMovement $stockMovement)
     {
+        if (auth()->user()->role !== 'administrator' && $stockMovement->user_id !== auth()->id())
+        {
+            return back()->with('error', 'Sie können nur Ihre eigenen Buchungen löschen.');
+    }
+
         $stockMovement->delete();
         return redirect()->route('stock-movements.index')
             ->with('success', 'Buchung gelöscht.');
