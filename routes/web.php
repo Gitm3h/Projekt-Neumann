@@ -85,7 +85,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'customer'])
+Route::middleware(['auth', 'customer', 'password_changed'])
     ->prefix('portal')->name('portal.')
     ->group(function () {
         Route::get('/', [PortalController::class, 'index'])->name('index');
@@ -97,6 +97,8 @@ Route::middleware(['auth', 'customer'])
             ->name('reservations.cancel');
         Route::patch('reservation-items/{item}', [PortalController::class, 'updateItem'])
             ->name('items.update');
+        Route::patch('profile/customer', [ProfileController::class, 'updateCustomer'])
+            ->name('profile.customer.update');
     });
 
     Route::middleware('role:administrator')->group(function () {
