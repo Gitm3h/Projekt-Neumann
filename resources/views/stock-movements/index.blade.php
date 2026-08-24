@@ -29,33 +29,36 @@
                     <td class="p-3">{{ $m->quantity }}</td>
                     <td class="p-3">{{ $m->user->name }}</td>
                     <td class="p-3">
-                        <!-- Delete Button -->
-                        <button type="button" x-data
+                        @if (auth()->id() === $m->user_id || auth()->user()->role === 'administrator')
+
+                            <!-- Delete Button -->
+                            <button type="button" x-data
                                 @click="$dispatch('open-modal', 'delete-movement--{{ $m->id }}')"
                                 class="text-red-600 hover:text-red-700">Löschen
-                        </button>
+                            </button>
 
-                        <!-- Delete Confirmation Modal -->
-                        <x-modal name="delete-movement--{{ $m->id }}" :show="false" maxWidth="md">
-                            <div class="p-6">
-                                <h2 class="text-lg font-semibold text-gray-800"> Buchung löschen? </h2>
-                                <p class="mt-2 text-sm text-gray-600">
-                                    Buchung vom {{ $m->date }} für "{{ $m->article?->name }}" wird dauerhaft gelöscht. Das lässt sich nicht rückgängig machen.
-                                </p>
-                                <div class="mt-6 flex justify-end gap-2">
-                                    <button type="button" x-on:click="$dispatch('close')"
-                                            class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded">Abbrechen</button>
-                                    <form action="{{ route('stock-movements.destroy', $m) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Löschen
-                                        </button>
-                                    </form>
+                            <!-- Delete Confirmation Modal -->
+                            <x-modal name="delete-movement--{{ $m->id }}" :show="false" maxWidth="md">
+                                <div class="p-6">
+                                    <h2 class="text-lg font-semibold text-gray-800"> Buchung löschen? </h2>
+                                    <p class="mt-2 text-sm text-gray-600">
+                                        Buchung vom {{ $m->date }} für "{{ $m->article?->name }}" wird dauerhaft gelöscht. Das lässt sich nicht rückgängig machen.
+                                    </p>
+                                    <div class="mt-6 flex justify-end gap-2">
+                                        <button type="button" x-on:click="$dispatch('close')"
+                                             class="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded">Abbrechen</button>
+                                        <form action="{{ route('stock-movements.destroy', $m) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Löschen
+                                            </button>
+                                        </form>
+
+                                    </div>
 
                                 </div>
-
-                            </div>
-                        </x-modal>
+                            </x-modal>
+                        @endif
 
                     </td>
                 </tr>

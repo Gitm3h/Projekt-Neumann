@@ -69,25 +69,10 @@
 
         @if ($role === 'spediteur')
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="{{ route('stock.index') }}"
-                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                    <div class="text-teal-700 font-semibold">Bestand</div>
-                    <div class="text-gray-500 text-sm">Artikel und Bestand einsehen</div>
-                </a>
                 <a href="{{ route('stock-movements.deliveries') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-teal-700 font-semibold">Lieferungen</div>
                     <div class="text-gray-500 text-sm">Warenein- und -ausgänge anmelden</div>
-                </a>
-                <a href="{{ route('stock-movements.index') }}"
-                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                    <div class="text-teal-700 font-semibold">Buchungen</div>
-                    <div class="text-gray-500 text-sm">Buchungen ansehen</div>
-                </a>
-                <a href="{{ route('reports.low-stock') }}"
-                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                    <div class="text-teal-700 font-semibold">{{ $lowStock ?? 0 }} Artikel</div>
-                    <div class="text-gray-500 text-sm">unter Mindestbestand</div>
                 </a>
             </div>
         @endif

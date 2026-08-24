@@ -104,9 +104,6 @@
                         <x-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
                             {{ __('Lieferungen') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.index')">
-                            {{ __('Bestand') }}
-                        </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role === 'lagermitarbeiter')
@@ -124,7 +121,7 @@
                         </x-nav-link>
                     @endif
 
-                    @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur']))
+                    @if (auth()->user()->role === 'lagermitarbeiter')
                         <x-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
                             {{ __('Buchungen') }}
                         </x-nav-link>
@@ -204,19 +201,19 @@
                 <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                     {{ __('Artikel') }}
                  </x-responsive-nav-link>
-                <x-responsive-nav-link :hre="route('categories.index')" :active="request()->routeIs('categories.index')">
+                <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                     {{ __('Kategorien') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                     {{ __('Lagerplätze') }}
                 </x-responsive-nav-link>
             @endif
-            @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur', 'administrator']))
+            @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'administrator']))
                 <x-responsive-nav-link :href="route('stock-movements.index')" :active="request()->routeIs('stock-movements.*')">
                     {{ __('Buchungen') }}
                 </x-responsive-nav-link>
             @endif
-            @if (in_array(auth()->user()->role, ['lagermitarbeiter', 'spediteur']))
+            @if (in_array(auth()->user()->role, ['lagermitarbeiter']))
                 <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.index')">
                     {{ __('Bestand') }}
                 </x-responsive-nav-link>
