@@ -40,6 +40,7 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('profile/customer', [ProfileController::class, 'updateCustomer'])->name('profile.customer.update');
 
     Route::get('password-changed', [PasswordChangeController::class, 'edit'])->name('password.force');
     Route::put('password-changed', [PasswordChangeController::class, 'update'])->name('password.force.update');

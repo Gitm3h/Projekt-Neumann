@@ -39,7 +39,7 @@ class ProfileController extends Controller
     {
         $customer = \App\Models\Customer::where('user_id', auth()->id())->firstOrFail();
 
-        $data = $request->validated([
+        $data = $request->validate([
             'street' => ['nullable', 'string'],
             'house_number' => ['nullable', 'string'],
             'postal_code' => ['nullable', 'string'],
