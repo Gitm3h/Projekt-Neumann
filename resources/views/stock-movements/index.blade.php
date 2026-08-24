@@ -48,7 +48,7 @@
                                     <form action="{{ route('stock-movements.destroy', $m) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="px-4 py-2 bg-red-600 hover:text-red-700 text-white rounded">Löschen
+                                        <button class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded">Löschen
                                         </button>
                                     </form>
 
