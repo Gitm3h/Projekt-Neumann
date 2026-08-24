@@ -12,7 +12,21 @@ class PortalController extends Controller
 {
     public function index()
     {
-        return view('portal.index');
+        $customer =Customer::where('user_id', auth()->id())->first();
+
+        $reservierungen = collect();
+        if ($customer) {
+            $reservierungen = Reservation::where('customer_id', $customer->id)->where('status', 'reserviert')
+                ->with('items.article')
+                ->get();
+        }
+
+        $anzahl = $reservierungen->count();
+        $wert = $reservierungen->sum(function ($r) {
+            return $r->items->sum(fn ($i) => $i->quantity * $i->article->price);
+        });
+
+        return view('portal.index', ['anzahl' => $anzahl, 'wert' => $wert]);
     }
 
     public function articles()

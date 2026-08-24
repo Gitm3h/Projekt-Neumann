@@ -26,7 +26,7 @@
                 </a>
                 <a href="{{ route('reservations.index') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
-                    <div class="text-teal-700 font-semibold">Reservierungen</div>
+                    <div class="text-teal-700 font-semibold">{{ $reservierungen ?? 0 }} Reservierungen</div>
                     <div class="text-gray-500 text-sm">Reservierungen verwalten</div>
                 </a>
                 <a href="{{ route('reports.z') }}"
