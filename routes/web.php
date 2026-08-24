@@ -31,7 +31,9 @@ Route::get('/dashboard', function () {
         ->filter(fn($s) => $s->quantity < $s->article->min_stock)
         ->count();
 
-    return view('dashboard', ['lowStock' => $lowStock]);
+    $reservierungen = \App\Models\Reservation::where('status', 'reserviert')->count();
+
+    return view('dashboard', ['lowStock' => $lowStock, 'reservierungen' => $reservierungen]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'password_changed'])->group(function () {

@@ -13,6 +13,17 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-white rounded shadow p-6">
+                <div class="text-teal-700 font-semibold text-2xl">{{ $anzahl ?? 0 }}</div>
+                <div class="text-gray-500 text-sm">reservierte Positionen</div>
+            </div>
+            <div class="bg-white rounded shadow p-6">
+                <div class="text-teal-700 font-semibold text-2xl">{{ number_format($wert ?? 0,2, ',', '.') }} &euro;</div>
+                <div class="text-gray-500 text-sm">Warenwert der Reservierungen</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <a href="{{route('portal.articles') }}" class="bg-white p-6 rounded-xl shadow border-2 border-transparent
             hover:border-teal-700 hover:shadow-md transition">
                 <div class="text-teal-700 font-semibold">Artikel</div>
@@ -24,5 +35,6 @@
                 <div class="text-gray-500 text-sm">Ihre Reservierungen und deren Status</div>
             </a>
         </div>
+
     </div>
 </x-app-layout>
