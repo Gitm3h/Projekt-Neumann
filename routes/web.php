@@ -75,6 +75,9 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::resource('stock-movements', StockMovementController::class)->only(['index', 'destroy']);
         Route::get('abholungen/anlegen', [PickupController::class, 'create'])->name('pickups.create');
         Route::post('abholungen', [PickupController::class, 'store'])->name('pickups.store');
+        Route::get('abholungen/verwalten', [PickupController::class, 'manage'])->name('pickups.manage');
+        Route::patch('abholungen/{pickup}/zuweisen', [PickupController::class, 'update'])->name('pickups.update');
+        Route::get('abholungen/{pickup}/bearbeiten', [PickupController::class, 'edit'])->name('pickups.edit');
     });
 
     Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {

@@ -119,6 +119,9 @@
                         <x-nav-link :href="route('pickups.create')" :active="request()->routeIs('pickups.create')">
                             {{ __('Abholung anlegen') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('pickups.manage')" :active="request()->routeIs('pickups.manage')">
+                            {{ __('Abholungen') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                             {{ __('Lagerplätze') }}
                         </x-nav-link>
@@ -229,6 +232,9 @@
             @if (auth()->user()->role === 'lagermitarbeiter')
                 <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.index')">
                     {{ __('Bestand') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('pickups.manage')" :active="request()->routeIs('pickups.manage')">
+                    {{ __('Abholungen') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('pickups.create')" :active="request()->routeIs('pickups.create')">
                     {{ __('Abholung anlegen') }}
