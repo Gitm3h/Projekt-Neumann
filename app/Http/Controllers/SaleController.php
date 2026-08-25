@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Stock;
 use App\Models\StockMovement;
 use App\Models\Customer;
+use App\Models\Pickup;
 class SaleController extends Controller
 {
     public function index()
@@ -116,6 +117,22 @@ class SaleController extends Controller
                 'payment_term_days' => $termDays,
                 'due_date' => $dueDate,
             ]);
+
+            if ($request->boolean('pickup')) {
+                $pickup = Pickup::create([
+                    'user_id' => auth()->id(),
+                    'customer_id' => $sale->customer_id,
+                    'status' => 'offen',
+                    'date' => now(),
+                ]);
+
+                foreach ($lines as $row) {
+                    $pickup->items()->create([
+                        'article_id' => $row['article_id'],
+                        'quantity' => $row['quantity'],
+                    ]);
+                }
+            }
 
         return redirect()->route('sales.index')->with('success', 'Verkauf gebucht');
     }
