@@ -49,7 +49,13 @@
                 @error('customer_id')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror
+            </div>
 
+            <div>
+                <label class="inline-flex items-center">
+                    <input type="checkbox" name="pickup" value="1" class="rounded border-gray-300 text-teal-600">
+                    <span class="ms-2 text-sm text-gray-700">Ware wird vom Spediteur abgeholt</span>
+                </label>
             </div>
 
             @error('items')
