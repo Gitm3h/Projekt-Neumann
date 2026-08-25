@@ -104,6 +104,9 @@
                         <x-nav-link :href="route('stock-movements.deliveries')" :active="request()->routeIs('stock-movements.deliveries')">
                             {{ __('Lieferungen') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('pickups.index')" :active="request()->routeIs('pickups.index')">
+                            {{ __('Abholungen') }}
+                        </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role === 'lagermitarbeiter')
@@ -112,6 +115,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                             {{ __('Kategorien') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('pickups.create')" :active="request()->routeIs('pickups.create')">
+                            {{ __('Abholung anlegen') }}
                         </x-nav-link>
                         <x-nav-link :href="route('storage-locations.index')" :active="request()->routeIs('storage-locations.*')">
                             {{ __('Lagerplätze') }}
@@ -197,6 +203,12 @@
                 </x-responsive-nav-link>
             @endif
 
+            @if (auth()->user()->role === 'spediteur')
+                <x-responsive-nav-link :href="route('pickups.index')" :active="request()->routeIs('pickups.index')">
+                    {{ __('Abholungen') }}
+                </x-responsive-nav-link>
+            @endif
+
             @if (in_array(auth()->user()->role, ['administrator', 'lagermitarbeiter']))
                 <x-responsive-nav-link :href="route('articles.index')" :active="request()->routeIs('articles.*')">
                     {{ __('Artikel') }}
@@ -213,11 +225,16 @@
                     {{ __('Buchungen') }}
                 </x-responsive-nav-link>
             @endif
-            @if (in_array(auth()->user()->role, ['lagermitarbeiter']))
+
+            @if (auth()->user()->role === 'lagermitarbeiter')
                 <x-responsive-nav-link :href="route('stock.index')" :active="request()->routeIs('stock.index')">
                     {{ __('Bestand') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('pickups.create')" :active="request()->routeIs('pickups.create')">
+                    {{ __('Abholung anlegen') }}
+                </x-responsive-nav-link>
             @endif
+
             @if (in_array(auth()->user()->role, ['kassenkraft', 'administrator']))
                 <x-responsive-nav-link :href="route('sales.index')" :active="request()->routeIs('sales.*')">
                     {{ __('Kasse') }}

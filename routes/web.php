@@ -17,6 +17,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PasswordChangeController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PickupController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -72,6 +73,8 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::get('stock', [StockController::class, 'index'])->name('stock.index');
         Route::resource('storage-locations', StorageLocationController::class);
         Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store','destroy']);
+        Route::get('abholungen/anlegen', [PickupController::class, 'create'])->name('pickups.create');
+        Route::post('abholungen', [PickupController::class, 'store'])->name('pickups.store');
     });
 
 
@@ -81,6 +84,8 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
 
     Route::middleware('role:spediteur,administrator')->group(function () {
         Route::get('lieferungen', [StockMovementController::class, 'deliveries'])->name('stock-movements.deliveries');
+        Route::get('abholungen', [PickupController::class, 'index'])->name('pickups.index');
+        Route::patch('abholungen/{pickup}', [PickupController::class, 'confirm'])->name('pickups.confirm');
     });
 
 
