@@ -54,6 +54,11 @@
                     <div class="text-teal-700 font-semibold">Buchungen</div>
                     <div class="text-gray-500 text-sm">Warenein- und -ausgänge buchen</div>
                 </a>
+                <a href="{{ route('pickups.create') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">Abholung anlegen</div>
+                    <div class="text-gray-500 text-sm">Ware zur Abholung vormerken</div>
+                </a>
                 <a href="{{ route('stock.index') }}"
                    class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
                     <div class="text-teal-700 font-semibold">Bestand</div>
@@ -74,6 +79,14 @@
                     <div class="text-teal-700 font-semibold">Lieferungen</div>
                     <div class="text-gray-500 text-sm">Warenein- und -ausgänge anmelden</div>
                 </a>
+                <a href="{{ route('pickups.index') }}"
+                   class="bg-white p-6 rounded-xl shadow border-2 border-transparent hover:border-teal-500 hover:shadow-md transition">
+                    <div class="text-teal-700 font-semibold">Abholungen</div>
+                    <div class="text-gray-500 text-sm">Warenentnahme bestätigen</div>
+                </a>
+
+
+
             </div>
         @endif
 
