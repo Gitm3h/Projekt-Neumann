@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use App\Models\Customer;
 use App\Models\User;
 
@@ -75,8 +76,8 @@ class CustomerController extends Controller
 
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$user->id],
-            'password' => ['nullable', 'string', 'min:8'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users','email')->ignore($user?->id)],
+            'password' => [$user ? 'nullable': 'required', 'string', 'min:8'],
             'type' => ['required', 'in:privat,gewerblich'],
             'street' => ['nullable', 'string'],
             'house_number' => ['nullable', 'string'],
@@ -92,9 +93,18 @@ class CustomerController extends Controller
                 $user->password = $data['password'];
             }
             $user->save();
+        } else {
+            $user =User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'role' => 'kunde',
+                'must_change_password' => true,
+            ]);
         }
 
         $customer->update([
+            'user_id' => $user->id,
             'name' => $data['name'],
             'type' => $data['type'],
             'street' => $data['street'] ?? null,
