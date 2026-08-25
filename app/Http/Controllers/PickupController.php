@@ -7,6 +7,7 @@ use App\Models\Pickup;
 use App\Models\Article;
 use App\Models\Stock;
 use App\Models\StockMovement;
+use App\Models\User;
 
 class PickupController extends Controller
 {
@@ -63,7 +64,11 @@ class PickupController extends Controller
 
     public function index()
     {
-        $pickups = Pickup::with('items.article', 'customer')->where('status', 'offen')->latest()->get();
+        $pickups = Pickup::with('items.article', 'customer')->where('status', 'offen')
+            ->where(function ($query) {
+                $query->where('spediteur_id', auth()->id())
+                ->orWhereNull('spediteur_id');
+            })->get();
         return view('pickups.index', ['pickups' => $pickups]);
     }
 
@@ -98,4 +103,27 @@ class PickupController extends Controller
         $pickup->update(['status' => 'abgeholt']);
         return redirect()->route('pickups.index')->with('success', 'Ware wurde abgeholt.');
     }
+
+    public function manage()
+    {
+        $pickups = Pickup::with('items.article', 'spediteur')->latest()->get();
+        return view('pickups.manage', ['pickups' => $pickups]);
+    }
+
+    public function edit(Pickup $pickup)
+    {
+        $spediteure =User::where('role', 'spediteur')->orderBy('name')->get();
+        return view('pickups.edit', ['pickup' => $pickup, 'spediteure' => $spediteure]);
+    }
+
+    public function update(Request $request, Pickup $pickup)
+    {
+    $data = $request->validate([
+        'spediteur_id' => ['nullable', 'exists:users,id'],
+    ]);
+    $pickup->update([
+        'spediteur_id' => $data['spediteur_id'] ?: null]);
+        return redirect()->route('pickups.manage')->with('success', 'Abholung erfolgreich aktualisiert.');
+    }
 }
+
