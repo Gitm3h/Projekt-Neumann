@@ -72,11 +72,15 @@ Route::middleware(['auth', 'password_changed'])->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::get('stock', [StockController::class, 'index'])->name('stock.index');
         Route::resource('storage-locations', StorageLocationController::class);
-        Route::resource('stock-movements', StockMovementController::class)->only(['index', 'create', 'store','destroy']);
+        Route::resource('stock-movements', StockMovementController::class)->only(['index', 'destroy']);
         Route::get('abholungen/anlegen', [PickupController::class, 'create'])->name('pickups.create');
         Route::post('abholungen', [PickupController::class, 'store'])->name('pickups.store');
     });
 
+    Route::middleware('role:lagermitarbeiter,spediteur,administrator')->group(function () {
+        Route::get('stock-movements/create', [StockMovementController::class, 'create'])->name('stock-movements.create');
+        Route::post('stock-movements', [StockMovementController::class, 'store'])->name('stock-movements.store');
+    });
 
     Route::middleware('role:administrator,kassenkraft,lagermitarbeiter')->group(function () {
         Route::get('niedrigbestand', [ReportController::class, 'niedrig'])->name('reports.low-stock');
